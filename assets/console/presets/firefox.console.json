@@ -1,0 +1,1 @@
+{ "name": "firefox", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT", "extends": "default", "theme": "light", "layout": "docked-bottom", "levels": { "log": { "color": "#0c0c0d" }, "info": { "color": "#0060df" }, "warn": { "color": "#ff9400" }, "error": { "color": "#d70022" } } }

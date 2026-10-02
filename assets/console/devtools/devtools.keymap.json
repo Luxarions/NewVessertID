@@ -1,0 +1,1 @@
+{ "name": "vscode", "bindings": { "Ctrl+L": "clear", "Ctrl+F": "search", "Ctrl+Shift+P": "command-palette", "Ctrl+S": "save", "Ctrl+C": "copy", "Ctrl+V": "paste" } }

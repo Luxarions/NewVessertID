@@ -1,0 +1,15 @@
+{
+  "name": "retro", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "Apache-2.0",
+  "description": "Retro CRT console", "extends": "default", "theme": "dracula",
+  "layout": "fullscreen", "keymap": "vim", "locale": "en",
+  "font": { "family": "VT323, monospace", "size": 16, "lineHeight": 1.4 },
+  "levels": {
+    "log":   { "color": "#00ff00", "prefix": ">" },
+    "info":  { "color": "#00ffff", "prefix": ">>" },
+    "warn":  { "color": "#ffff00", "prefix": "!!" },
+    "error": { "color": "#ff0000", "prefix": "XX" },
+    "debug": { "color": "#008800", "prefix": ".." },
+    "trace": { "color": "#005500", "prefix": "??" }
+  },
+  "features": { "timestamp": true, "timestampFormat": "HH:mm:ss", "maxLines": 5000, "wrapLines": false }
+}

@@ -1,0 +1,15 @@
+/**
+ * @file Overlay layout preset.
+ * @module layouts/OverlayLayout
+ */
+
+import { Layout } from './Layout.js';
+
+/** Overlay layout. */
+class OverlayLayout extends Layout {
+  constructor() {
+    super({ name: 'overlay', position: 'overlay', anchor: 'bottom', width: '100%', height: 320, resizable: true, draggable: true, collapsible: true, padding: 8, border: '1px solid #30363d', zIndex: 9999 });
+  }
+}
+
+export { OverlayLayout };

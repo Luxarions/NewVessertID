@@ -1,0 +1,224 @@
+[
+  {
+    "name": "console_basic.html",
+    "title": "Basic Console",
+    "description": "Default console with dark theme",
+    "tag": "console"
+  },
+  {
+    "name": "console_minimal.html",
+    "title": "Minimal Console",
+    "description": "Bare console",
+    "tag": "console"
+  },
+  {
+    "name": "console_devtools.html",
+    "title": "DevTools Console",
+    "description": "Browser DevTools-like layout",
+    "tag": "console"
+  },
+  {
+    "name": "console_retro.html",
+    "title": "Retro Console",
+    "description": "CRT-style fullscreen console",
+    "tag": "console"
+  },
+  {
+    "name": "theme_dark.html",
+    "title": "Theme: Dark",
+    "description": "Dark theme",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_light.html",
+    "title": "Theme: Light",
+    "description": "Light theme",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_dracula.html",
+    "title": "Theme: Dracula",
+    "description": "Dracula theme",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_nord.html",
+    "title": "Theme: Nord",
+    "description": "Nord theme",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_solarized.html",
+    "title": "Theme: Solarized",
+    "description": "Solarized dark/light",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_monokai.html",
+    "title": "Theme: Monokai",
+    "description": "Monokai theme",
+    "tag": "theme"
+  },
+  {
+    "name": "theme_gruvbox.html",
+    "title": "Theme: Gruvbox",
+    "description": "Gruvbox theme",
+    "tag": "theme"
+  },
+  {
+    "name": "layout_inline.html",
+    "title": "Layout: Inline",
+    "description": "Inline at bottom",
+    "tag": "layout"
+  },
+  {
+    "name": "layout_overlay.html",
+    "title": "Layout: Overlay",
+    "description": "Floating overlay",
+    "tag": "layout"
+  },
+  {
+    "name": "layout_docked_bottom.html",
+    "title": "Layout: Docked Bottom",
+    "description": "Docked bottom",
+    "tag": "layout"
+  },
+  {
+    "name": "layout_docked_right.html",
+    "title": "Layout: Docked Right",
+    "description": "Docked right",
+    "tag": "layout"
+  },
+  {
+    "name": "layout_fullscreen.html",
+    "title": "Layout: Fullscreen",
+    "description": "Full viewport",
+    "tag": "layout"
+  },
+  {
+    "name": "keymap_vim.html",
+    "title": "Keymap: Vim",
+    "description": "Vim navigation",
+    "tag": "keymap"
+  },
+  {
+    "name": "keymap_emacs.html",
+    "title": "Keymap: Emacs",
+    "description": "Emacs navigation",
+    "tag": "keymap"
+  },
+  {
+    "name": "keymap_vscode.html",
+    "title": "Keymap: VS Code",
+    "description": "VS Code shortcuts",
+    "tag": "keymap"
+  },
+  {
+    "name": "locale_id.html",
+    "title": "Locale: Indonesian",
+    "description": "Indonesian",
+    "tag": "locale"
+  },
+  {
+    "name": "locale_ja.html",
+    "title": "Locale: Japanese",
+    "description": "Japanese",
+    "tag": "locale"
+  },
+  {
+    "name": "locale_zh.html",
+    "title": "Locale: Chinese",
+    "description": "Simplified Chinese",
+    "tag": "locale"
+  },
+  {
+    "name": "preset_npm.html",
+    "title": "Preset: npm",
+    "description": "npm-style",
+    "tag": "preset"
+  },
+  {
+    "name": "preset_chrome.html",
+    "title": "Preset: Chrome",
+    "description": "Chrome DevTools style",
+    "tag": "preset"
+  },
+  {
+    "name": "preset_firefox.html",
+    "title": "Preset: Firefox",
+    "description": "Firefox Developer Edition style",
+    "tag": "preset"
+  },
+  {
+    "name": "preset_vscode.html",
+    "title": "Preset: VS Code",
+    "description": "Visual Studio Code terminal style",
+    "tag": "preset"
+  },
+  {
+    "name": "preset_node.html",
+    "title": "Preset: Node.js",
+    "description": "Node.js REPL / terminal style",
+    "tag": "preset"
+  },
+  {
+    "name": "preset_bun.html",
+    "title": "Preset: Bun",
+    "description": "Bun runtime terminal style",
+    "tag": "preset"
+  },
+  {
+    "name": "interactive_prompt.html",
+    "title": "Interactive Prompt",
+    "description": "Command line and prompt input",
+    "tag": "interactive"
+  },
+  {
+    "name": "interactive_history.html",
+    "title": "Command History",
+    "description": "Command history and auto-complete",
+    "tag": "interactive"
+  },
+  {
+    "name": "effect_glitch.html",
+    "title": "Effect: Glitch",
+    "description": "Visual glitch animation effect",
+    "tag": "effect"
+  },
+  {
+    "name": "effect_scanlines.html",
+    "title": "Effect: Scanlines",
+    "description": "CRT scanlines filter",
+    "tag": "effect"
+  },
+  {
+    "name": "effect_bloom.html",
+    "title": "Effect: Bloom",
+    "description": "Phosphor bloom effect",
+    "tag": "effect"
+  },
+  {
+    "name": "animation_typewriter.html",
+    "title": "Animation: Typewriter",
+    "description": "Character-by-character typewriter reveal",
+    "tag": "animation"
+  },
+  {
+    "name": "export_formats.html",
+    "title": "Export Formats",
+    "description": "Exporting logs to JSON, Text, and HTML",
+    "tag": "export"
+  },
+  {
+    "name": "inspector_basic.html",
+    "title": "Inspector Panel",
+    "description": "Inspecting console raw data and state",
+    "tag": "inspector"
+  },
+  {
+    "name": "renderer_canvas.html",
+    "title": "Renderer: Canvas 2D",
+    "description": "Rendering console output directly onto HTML5 Canvas",
+    "tag": "renderer"
+  }
+]

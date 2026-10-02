@@ -1,0 +1,1 @@
+{ "name": "inline", "position": "inline", "anchor": "bottom", "width": "100%", "height": "auto", "resizable": false, "draggable": false, "collapsible": true, "padding": 4, "border": "none", "zIndex": 1 }

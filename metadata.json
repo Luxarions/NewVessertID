@@ -1,0 +1,7 @@
+{
+  "name": "VessertID Console Studio",
+  "description": "Production-grade modular console and terminal framework with customizable themes, layouts, keymaps, devtools inspectors, and retro CRT rendering.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

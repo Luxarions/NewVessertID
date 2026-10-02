@@ -1,0 +1,1 @@
+{ "name": "nord", "author": "Arctic Ice Studio", "license": "MIT", "source": "https://www.nordtheme.com", "colors": { "background": "#2e3440", "foreground": "#d8dee9", "border": "#4c566a" }, "levels": { "log": "#d8dee9", "info": "#88c0d0", "warn": "#ebcb8b", "error": "#bf616a" } }

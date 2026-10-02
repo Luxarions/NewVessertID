@@ -1,0 +1,1 @@
+{ "name": "vscode", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT", "extends": "default", "theme": "dark", "layout": "docked-bottom", "font": { "family": "Consolas, monospace", "size": 13, "lineHeight": 1.4 }, "levels": { "log": { "color": "#d4d4d4" }, "info": { "color": "#569cd6" }, "warn": { "color": "#dcdcaa" }, "error": { "color": "#f44747" } } }

@@ -1,0 +1,17 @@
+{
+  "console": "Console variants",
+  "theme": "Color themes",
+  "layout": "Layouts",
+  "keymap": "Key bindings",
+  "locale": "Translations",
+  "preset": "Ready-made presets",
+  "interactive": "Interactive input",
+  "effect": "Visual effects",
+  "animation": "Animations",
+  "export": "Export formats",
+  "inspector": "Inspection tools",
+  "controls": "User controls",
+  "renderer": "Renderers",
+  "webxr": "XR sessions",
+  "misc": "Miscellaneous"
+}

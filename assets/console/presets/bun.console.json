@@ -1,0 +1,1 @@
+{ "name": "bun", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT", "extends": "default", "theme": "dark", "layout": "inline", "levels": { "log": { "color": "#fbf0df" }, "info": { "color": "#8bd5ca" }, "warn": { "color": "#f9e2af" }, "error": { "color": "#f38ba8" } } }

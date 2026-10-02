@@ -1,0 +1,1 @@
+{ "name": "fullscreen", "position": "fullscreen", "anchor": "center", "width": "100%", "height": "100%", "resizable": false, "draggable": false, "collapsible": true, "padding": 16, "border": "2px solid #00ff00", "zIndex": 10000 }

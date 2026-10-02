@@ -1,0 +1,1 @@
+{ "name": "docked-right", "position": "docked", "anchor": "right", "width": 360, "height": "100%", "resizable": true, "draggable": false, "collapsible": true, "padding": 8, "border": "1px solid #30363d", "zIndex": 1000 }

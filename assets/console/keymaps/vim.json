@@ -1,0 +1,1 @@
+{ "name": "vim", "bindings": { ":clear": "clear", "/": "search", "n": "search-next", "N": "search-prev", "gg": "scroll-top", "G": "scroll-bottom", "j": "scroll-down", "k": "scroll-up" } }

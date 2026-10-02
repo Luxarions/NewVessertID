@@ -1,0 +1,1 @@
+{ "name": "default", "bindings": { "Ctrl+L": "clear", "Ctrl+F": "filter", "Ctrl+Shift+F": "search", "Ctrl+`": "toggle", "Ctrl+S": "export", "Ctrl+C": "copy", "Escape": "close", "ArrowUp": "history-prev", "ArrowDown": "history-next", "Tab": "autocomplete" } }

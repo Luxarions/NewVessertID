@@ -1,0 +1,1 @@
+{ "name": "solarized-dark", "author": "Ethan Schoonover", "license": "MIT", "source": "https://ethanschoonover.com/solarized", "colors": { "background": "#002b36", "foreground": "#839496", "border": "#073642" }, "levels": { "log": "#839496", "info": "#268bd2", "warn": "#b58900", "error": "#dc322f" } }

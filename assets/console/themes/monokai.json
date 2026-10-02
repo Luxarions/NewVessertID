@@ -1,0 +1,1 @@
+{ "name": "monokai", "author": "Wimer Hazenberg", "license": "MIT", "source": "https://monokai.nl", "colors": { "background": "#272822", "foreground": "#f8f8f2", "border": "#3e3d32" }, "levels": { "log": "#f8f8f2", "info": "#66d9ef", "warn": "#e6db74", "error": "#f92672" } }

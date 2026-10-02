@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VessertID — Theme: Nord</title>
+  <link rel="stylesheet" href="./example.css" />
+</head>
+<body class="example">
+  <div class="example-header">
+    <a href="./index.html">← Back to Examples</a>
+    <h1>Theme: Nord</h1>
+    <span style="font-size:12px;color:#8b949e;">Nord theme</span>
+    <div class="example-actions">
+      <button id="btn-log">Log</button>
+      <button id="btn-warn">Warn</button>
+      <button id="btn-error">Error</button>
+      <button id="btn-clear">Clear</button>
+    </div>
+  </div>
+  <div class="example-body" id="console-container"></div>
+
+  <script type="module">
+    import { Console } from "../src/Vessert.js";
+    const c = new Console();
+    const container = document.getElementById("console-container");
+    c.engine.renderer.dom.mount(container);
+    c.log("VessertID Console: Theme: Nord");
+    c.info("Nord theme");
+    c.debug("Module initialized. Revision: 1.0.0");
+    document.getElementById("btn-log")?.addEventListener("click", () => c.log("Sample log at " + new Date().toLocaleTimeString()));
+    document.getElementById("btn-warn")?.addEventListener("click", () => c.warn("Sample warning message"));
+    document.getElementById("btn-error")?.addEventListener("click", () => c.error("Sample error message"));
+    document.getElementById("btn-clear")?.addEventListener("click", () => c.clear());
+  </script>
+</body>
+</html>

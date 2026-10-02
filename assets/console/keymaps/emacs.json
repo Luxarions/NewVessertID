@@ -1,0 +1,1 @@
+{ "name": "emacs", "bindings": { "C-l": "clear", "C-s": "search", "C-r": "search-backward", "M-<": "scroll-top", "M->": "scroll-bottom", "C-n": "scroll-down", "C-p": "scroll-up" } }

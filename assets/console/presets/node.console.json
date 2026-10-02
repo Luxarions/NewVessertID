@@ -1,0 +1,1 @@
+{ "name": "node", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT", "extends": "default", "theme": "dark", "layout": "inline", "levels": { "log": { "color": "#ffffff" }, "info": { "color": "#00bcd4" }, "warn": { "color": "#ffc107" }, "error": { "color": "#f44336" } } }

@@ -1,0 +1,27 @@
+body.example { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; flex-direction: column; }
+.example-header { padding: 12px 16px; border-bottom: 1px solid #30363d; display: flex; gap: 12px; align-items: center; background: #161b22; }
+.example-header a { color: #58a6ff; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
+.example-header h1 { margin: 0; font-size: 14px; font-weight: 500; }
+.example-actions { margin-left: auto; display: flex; gap: 8px; }
+.example-actions button { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; }
+.example-actions button:hover { border-color: #58a6ff; color: #fff; }
+.example-body { padding: 24px; flex: 1; }
+.vessert-console { background: #0d1117; color: #c9d1d9; font-family: monospace; font-size: 13px; line-height: 1.5; overflow: auto; border: 1px solid #30363d; border-radius: 6px; }
+.vessert-line { padding: 3px 8px; white-space: pre-wrap; word-break: break-word; }
+.vessert-log   { color: #c9d1d9; }
+.vessert-info  { color: #58a6ff; }
+.vessert-warn  { color: #d29922; }
+.vessert-error { color: #f85149; font-weight: bold; }
+.vessert-debug { color: #8b949e; font-style: italic; }
+.vessert-trace { color: #6e7681; text-decoration: underline; }
+.vessert-line.selected { background: #264f78; }
+.vessert-line.vessert-match { background: #2d333b; }
+.vessert-glitch { animation: vessert-glitch 0.5s linear; }
+@keyframes vessert-glitch { 0% { transform: translate(0,0); } 50% { transform: translate(2px, -2px); } 100% { transform: translate(0,0); } }
+.vessert-scanlines { background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px); }
+.vessert-chroma { text-shadow: 1px 0 rgba(255,0,0,0.6), -1px 0 rgba(0,255,255,0.6); }
+.vessert-context-menu { position: fixed; background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 4px 0; font-size: 13px; z-index: 10001; }
+.vessert-context-menu div { padding: 6px 12px; cursor: pointer; }
+.vessert-context-menu div:hover { background: #21262d; }
+.vessert-inspector { border: 1px solid #30363d; border-radius: 6px; padding: 12px; margin-top: 16px; font-size: 12px; background: #161b22; }
+.vessert-inspector pre { white-space: pre-wrap; word-break: break-word; color: #58a6ff; }

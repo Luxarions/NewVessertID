@@ -1,0 +1,1 @@
+{ "name": "chrome", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT", "extends": "default", "theme": "light", "layout": "docked-bottom", "font": { "family": "Menlo, monospace", "size": 12, "lineHeight": 1.4 }, "levels": { "log": { "color": "#202124" }, "info": { "color": "#1a73e8" }, "warn": { "color": "#f9ab00" }, "error": { "color": "#d93025" } } }

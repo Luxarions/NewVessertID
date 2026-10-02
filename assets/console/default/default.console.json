@@ -1,0 +1,24 @@
+{
+  "name": "default", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT",
+  "description": "Default console", "extends": null, "theme": "dark",
+  "layout": "docked-bottom", "keymap": "default", "locale": "en",
+  "font": { "family": "monospace", "size": 13, "lineHeight": 1.5, "weight": 400 },
+  "levels": {
+    "log":   { "color": "#c9d1d9", "prefix": "", "icon": "log" },
+    "info":  { "color": "#58a6ff", "prefix": "[INFO]", "icon": "info" },
+    "warn":  { "color": "#d29922", "prefix": "[WARN]", "icon": "warn" },
+    "error": { "color": "#f85149", "prefix": "[ERROR]", "bold": true, "icon": "error" },
+    "debug": { "color": "#8b949e", "prefix": "[DEBUG]", "italic": true, "icon": "debug" },
+    "trace": { "color": "#6e7681", "prefix": "[TRACE]", "underline": true, "icon": "debug" }
+  },
+  "features": {
+    "timestamp": true, "timestampFormat": "HH:mm:ss.SSS", "stackTrace": true,
+    "groupIndent": 2, "clearOnReload": false, "maxLines": 10000, "maxHistory": 1000,
+    "autoScroll": true, "wrapLines": true, "showLineNumbers": true, "showSource": true,
+    "filterable": true, "searchable": true, "exportable": true, "copyable": true
+  },
+  "shortcuts": {
+    "clear": "Ctrl+L", "filter": "Ctrl+F", "search": "Ctrl+Shift+F",
+    "toggle": "Ctrl+`", "export": "Ctrl+S", "copy": "Ctrl+C"
+  }
+}

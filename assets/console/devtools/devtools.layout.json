@@ -1,0 +1,1 @@
+{ "name": "docked-bottom", "position": "docked", "anchor": "bottom", "width": "100%", "height": 300, "resizable": true, "draggable": false, "collapsible": true, "padding": 0, "border": "1px solid #d0d7de", "zIndex": 1000 }

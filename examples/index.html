@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VessertID — Examples Gallery</title>
+  <link rel="stylesheet" href="./main.css" />
+</head>
+<body>
+  <header>
+    <h1>VessertID <span>/ Examples Gallery</span></h1>
+    <input type="text" id="search" placeholder="Search examples by title, tag, or description..." autofocus />
+    <span style="font-size: 13px; color: var(--muted);" id="count"></span>
+  </header>
+  <div id="tags-bar"></div>
+  <div id="grid"></div>
+  <script type="module">
+    let allFiles = [];
+    let tags = {};
+    let activeTag = "all";
+    async function loadData() {
+      const [filesRes, tagsRes] = await Promise.all([
+        fetch("./files.json"),
+        fetch("./tags.json")
+      ]);
+      allFiles = await filesRes.json();
+      tags = await tagsRes.json();
+      renderTags();
+      renderGrid();
+    }
+    function renderTags() {
+      const bar = document.getElementById("tags-bar");
+      bar.innerHTML = '<button class="tag-btn active" data-tag="all">All</button>';
+      Object.entries(tags).forEach(([key, label]) => {
+        const btn = document.createElement("button");
+        btn.className = "tag-btn";
+        btn.dataset.tag = key;
+        btn.textContent = label;
+        btn.addEventListener("click", () => {
+          document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+          activeTag = key;
+          renderGrid();
+        });
+        bar.appendChild(btn);
+      });
+      bar.querySelector('[data-tag="all"]').addEventListener("click", (e) => {
+        document.querySelectorAll(".tag-btn").forEach(b => b.classList.remove("active"));
+        e.target.classList.add("active");
+        activeTag = "all";
+        renderGrid();
+      });
+    }
+    function renderGrid() {
+      const grid = document.getElementById("grid");
+      const query = document.getElementById("search").value.toLowerCase().trim();
+      grid.innerHTML = "";
+      const filtered = allFiles.filter(item => {
+        const matchesTag = activeTag === "all" || item.tag === activeTag;
+        const matchesQuery = !query ||
+          item.title.toLowerCase().includes(query) ||
+          item.description.toLowerCase().includes(query) ||
+          item.tag.toLowerCase().includes(query);
+        return matchesTag && matchesQuery;
+      });
+      document.getElementById("count").textContent = `${filtered.length} examples`;
+      filtered.forEach(item => {
+        const a = document.createElement("a");
+        a.className = "card";
+        a.href = `./${item.name}`;
+        a.innerHTML = `
+          <h3>${item.title}</h3>
+          <p>${item.description}</p>
+          <span class="tag">${tags[item.tag] || item.tag}</span>
+        `;
+        grid.appendChild(a);
+      });
+    }
+    document.getElementById("search").addEventListener("input", renderGrid);
+    loadData();
+  </script>
+</body>
+</html>

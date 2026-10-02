@@ -1,0 +1,12 @@
+{
+  "name": "minimal", "version": "1.0.0", "author": "Prasetyo Bayu", "license": "MIT",
+  "extends": "default", "theme": "light", "layout": "inline", "keymap": "default", "locale": "en",
+  "font": { "family": "monospace", "size": 12, "lineHeight": 1.4 },
+  "levels": {
+    "log":   { "color": "#000000", "prefix": "" },
+    "info":  { "color": "#0066cc", "prefix": "" },
+    "warn":  { "color": "#cc6600", "prefix": "" },
+    "error": { "color": "#cc0000", "prefix": "" }
+  },
+  "features": { "timestamp": false, "maxLines": 1000, "showLineNumbers": false }
+}
