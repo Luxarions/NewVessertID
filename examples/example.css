@@ -32,7 +32,13 @@ html, body.example {
   align-items: center;
   background: #0e131d;
   flex-shrink: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.example-header::-webkit-scrollbar {
+  display: none;
 }
 .example-header a {
   color: #38bdf8;
