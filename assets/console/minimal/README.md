@@ -1,3 +1,3 @@
 # Minimal
-Source: Prasetyo Bayu — https://github.com/Luxarions/VessertID
+Source: Prasetyo Bayu — https://github.com/Luxarions/NewVessertID
 License: MIT

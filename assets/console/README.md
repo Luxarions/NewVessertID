@@ -18,4 +18,4 @@ themes — per file header
 locales — MIT
 
 ## Collection
-https://github.com/Luxarions/VessertID
+https://github.com/Luxarions/NewVessertID
