@@ -253,6 +253,40 @@ export class VessertApp {
     return this;
   }
 
+  /* ---------------- API Usage Detector & Auditor ---------------- */
+
+  /**
+   * Wrap an API object/module with an observable audit proxy that detects
+   * method calls, parameter validation, deprecation warnings, and execution durations.
+   * @template T
+   * @param {T} target
+   * @param {string} [namespace='API']
+   * @returns {T}
+   */
+  audit(target, namespace = 'API') {
+    return this.console.audit(target, namespace);
+  }
+
+  /**
+   * Register a deprecation warning for an API method.
+   * @param {string} methodName
+   * @param {string} [replacement]
+   */
+  deprecate(methodName, replacement = '') {
+    this.console.deprecate(methodName, replacement);
+    return this;
+  }
+
+  /**
+   * Register a parameter validator for an API method.
+   * @param {string} methodName
+   * @param {Function} validatorFn
+   */
+  validate(methodName, validatorFn) {
+    this.console.validate(methodName, validatorFn);
+    return this;
+  }
+
   /* ---------------- Multi-Sink & Browser Mirroring ---------------- */
 
   /**

@@ -10,6 +10,7 @@ import { EventDispatcher } from '../events/EventDispatcher.js';
 import { TableFormatter } from '../formatters/TableFormatter.js';
 import { Profiler } from './Profiler.js';
 import { Channel } from './Channel.js';
+import { ApiAuditor } from './ApiAuditor.js';
 import { EVENTS } from '../constants.js';
 
 /**
@@ -30,6 +31,8 @@ class Console extends EventDispatcher {
     this.tableFormatter = new TableFormatter();
     /** @type {Profiler} */
     this.profiler = new Profiler();
+    /** @type {ApiAuditor} */
+    this.auditor = new ApiAuditor(this);
     /** @type {Map<string, Channel>} */
     this.channels = new Map();
     /** @type {Map<string, { handler: Function, description: string }>} */
@@ -243,6 +246,39 @@ class Console extends EventDispatcher {
    */
   addSink(sinkFn) {
     return this.engine.sinkRouter.addSink(sinkFn);
+  }
+
+  /* --------------------------------------------------------------------------
+     API Usage Detector & Telemetry Auditor
+     -------------------------------------------------------------------------- */
+  /**
+   * Wrap an API object/module with an observable audit proxy that detects
+   * method calls, parameter validation, deprecation warnings, and execution durations.
+   * @template T
+   * @param {T} target
+   * @param {string} [namespace='API']
+   * @returns {T}
+   */
+  audit(target, namespace = 'API') {
+    return this.auditor.audit(target, namespace);
+  }
+
+  /**
+   * Register a deprecation warning for an API method.
+   * @param {string} methodName
+   * @param {string} [replacement]
+   */
+  deprecate(methodName, replacement = '') {
+    this.auditor.deprecate(methodName, replacement);
+  }
+
+  /**
+   * Register a parameter validator for an API method.
+   * @param {string} methodName
+   * @param {Function} validatorFn
+   */
+  validate(methodName, validatorFn) {
+    this.auditor.registerValidator(methodName, validatorFn);
   }
 
   /* --------------------------------------------------------------------------

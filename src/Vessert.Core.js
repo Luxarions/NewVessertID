@@ -12,6 +12,7 @@ export { ConsoleLifecycle } from './core/ConsoleLifecycle.js';
 export { Channel } from './core/Channel.js';
 export { Profiler } from './core/Profiler.js';
 export { SinkRouter } from './core/SinkRouter.js';
+export { ApiAuditor } from './core/ApiAuditor.js';
 
 export { ConsoleParser } from './parsers/ConsoleParser.js';
 export { ThemeParser } from './parsers/ThemeParser.js';
