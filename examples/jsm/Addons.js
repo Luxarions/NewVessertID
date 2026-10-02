@@ -126,3 +126,5 @@ export { WorkerUtils } from './utils/WorkerUtils.js';
 export { VRConsole } from './webxr/VRConsole.js';
 export { ARConsole } from './webxr/ARConsole.js';
 export { XRSession } from './webxr/XRSession.js';
+
+export { VessertApp } from './app/VessertApp.js';
