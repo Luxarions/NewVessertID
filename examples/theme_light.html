@@ -21,17 +21,16 @@
   <div class="example-body" id="console-container"></div>
 
   <script type="module">
-    import { Console } from "../src/Vessert.js";
-    import { ConsoleUI } from "./jsm/ui/ConsoleUI.js";
-    const c = new Console({ theme: "light" });
-    const container = document.getElementById("console-container");
-    const ui = new ConsoleUI(c, {
-      container,
+    import { VessertApp } from "./jsm/app/VessertApp.js";
+    const app = new VessertApp({
+      container: document.getElementById("console-container"),
       title: "Theme: Light",
       theme: "light",
       retroCRT: false,
-      badge: "THEME"
+      badge: "THEME",
+      plugins: []
     });
+    const c = app; // Aliased for full backward compatibility
     c.log("VessertID Console: Theme: Light");
     c.info("Light theme");
     c.debug("Module initialized. Revision: 1.0.0");

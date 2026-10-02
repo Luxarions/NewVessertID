@@ -21,17 +21,16 @@
   <div class="example-body" id="console-container"></div>
 
   <script type="module">
-    import { Console } from "../src/Vessert.js";
-    import { ConsoleUI } from "./jsm/ui/ConsoleUI.js";
-    const c = new Console({ theme: "dark" });
-    const container = document.getElementById("console-container");
-    const ui = new ConsoleUI(c, {
-      container,
+    import { VessertApp } from "./jsm/app/VessertApp.js";
+    const app = new VessertApp({
+      container: document.getElementById("console-container"),
       title: "Inspector Panel",
       theme: "dark",
       retroCRT: false,
-      badge: "INSPECTOR"
+      badge: "INSPECTOR",
+      plugins: ['inspector']
     });
+    const c = app; // Aliased for full backward compatibility
     c.log("VessertID Console: Inspector Panel");
     c.info("Inspecting console raw data and state");
     c.debug("Module initialized. Revision: 1.0.0");

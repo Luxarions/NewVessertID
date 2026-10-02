@@ -1,5 +1,11 @@
 [
   {
+    "name": "workbench.html",
+    "title": "Master Application Workbench",
+    "description": "All-in-one console studio powered by VessertApp",
+    "tag": "console"
+  },
+  {
     "name": "console_basic.html",
     "title": "Basic Console",
     "description": "Default console with dark theme",

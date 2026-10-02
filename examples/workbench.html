@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VessertID — Master Application Workbench</title>
+  <link rel="stylesheet" href="./example.css" />
+  <style>
+    .workbench-layout {
+      display: flex;
+      flex: 1 1 0;
+      min-height: 0;
+      height: 100%;
+      overflow: hidden;
+      gap: 12px;
+    }
+    .workbench-sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background: #0f1520;
+      border: 1px solid #1e2638;
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 14px;
+      gap: 16px;
+    }
+    .wb-section-title {
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #38bdf8;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .wb-btn-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 6px;
+    }
+    .wb-btn {
+      background: #17202e;
+      border: 1px solid #232f42;
+      color: #cbd5e1;
+      padding: 6px 8px;
+      border-radius: 5px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.15s ease;
+    }
+    .wb-btn:hover {
+      background: #223047;
+      color: #fff;
+      border-color: #38bdf8;
+    }
+    .wb-btn.active {
+      background: rgba(56, 189, 248, 0.16);
+      color: #38bdf8;
+      border-color: #38bdf8;
+    }
+    .wb-toggle-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #94a3b8;
+      background: #141b26;
+      padding: 6px 10px;
+      border-radius: 5px;
+      border: 1px solid #1e2838;
+      cursor: pointer;
+    }
+    .wb-toggle-item:hover {
+      color: #fff;
+      border-color: #2e3e57;
+    }
+    .wb-toggle-input {
+      accent-color: #38bdf8;
+      cursor: pointer;
+    }
+    .workbench-main {
+      flex: 1 1 0;
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="example">
+  <div class="example-header">
+    <a href="./index.html">← Examples Gallery</a>
+    <h1>Master Application Workbench</h1>
+    <span>Unified VessertApp Orchestrator</span>
+    <div class="example-actions">
+      <button id="btn-demo-burst">🚀 Burst 20 Logs</button>
+      <button id="btn-demo-bench">⚡ Benchmark 1K</button>
+      <button id="btn-export-json">💾 Export JSON</button>
+      <button id="btn-clear-all">🧹 Clear</button>
+    </div>
+  </div>
+
+  <div class="example-body">
+    <div class="workbench-layout">
+      <!-- Sidebar Controls -->
+      <aside class="workbench-sidebar">
+        <!-- Theme Controls -->
+        <div>
+          <div class="wb-section-title">🎨 Theme System</div>
+          <div class="wb-btn-grid" id="theme-controls">
+            <button class="wb-btn active" data-theme="dark">Dark</button>
+            <button class="wb-btn" data-theme="dracula">Dracula</button>
+            <button class="wb-btn" data-theme="nord">Nord</button>
+            <button class="wb-btn" data-theme="monokai">Monokai</button>
+            <button class="wb-btn" data-theme="gruvbox">Gruvbox</button>
+            <button class="wb-btn" data-theme="solarized-dark">Solarized</button>
+            <button class="wb-btn" data-theme="light">Light</button>
+          </div>
+        </div>
+
+        <!-- Addons & Effects -->
+        <div>
+          <div class="wb-section-title">✨ Addons & Effects</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <label class="wb-toggle-item">
+              <span>Retro CRT Scanlines</span>
+              <input type="checkbox" id="chk-crt" class="wb-toggle-input" />
+            </label>
+            <label class="wb-toggle-item">
+              <span>Typewriter Effect</span>
+              <input type="checkbox" id="chk-typewriter" class="wb-toggle-input" />
+            </label>
+            <label class="wb-toggle-item">
+              <span>Inspector Panel</span>
+              <input type="checkbox" id="chk-inspector" class="wb-toggle-input" />
+            </label>
+          </div>
+        </div>
+
+        <!-- Presets -->
+        <div>
+          <div class="wb-section-title">📦 Environment Presets</div>
+          <div class="wb-btn-grid" id="preset-controls">
+            <button class="wb-btn" data-preset="node">Node.js</button>
+            <button class="wb-btn" data-preset="bun">Bun</button>
+            <button class="wb-btn" data-preset="chrome">Chrome</button>
+            <button class="wb-btn" data-preset="vscode">VS Code</button>
+          </div>
+        </div>
+
+        <!-- Simulation -->
+        <div>
+          <div class="wb-section-title">🧪 Log Generator</div>
+          <div style="display: flex; flex-direction: column; gap: 6px;">
+            <button class="wb-btn" id="btn-gen-info" style="text-align: left; padding: 6px 10px;">ℹ Send Info Event</button>
+            <button class="wb-btn" id="btn-gen-warn" style="text-align: left; padding: 6px 10px; color: #fbbf24;">⚠ Send Warn Warning</button>
+            <button class="wb-btn" id="btn-gen-error" style="text-align: left; padding: 6px 10px; color: #f87171;">✖ Send Fatal Error</button>
+            <button class="wb-btn" id="btn-gen-debug" style="text-align: left; padding: 6px 10px; color: #a5b4fc;">🐞 Send Debug Trace</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Main VessertApp Container -->
+      <main class="workbench-main" id="app-container"></main>
+    </div>
+  </div>
+
+  <script type="module">
+    import { VessertApp } from "./jsm/app/VessertApp.js";
+
+    // Initialize the Master Application Orchestrator
+    const app = new VessertApp({
+      container: document.getElementById("app-container"),
+      title: "Master Console Workstation",
+      badge: "VESSERT-APP",
+      theme: "dark",
+      persist: true
+    });
+
+    app.info("🚀 VessertApp Master Application Prototype Loaded");
+    app.log("Connected Core Engine (src/) + External Visual UI (jsm/ui/) + Modular Addons (jsm/)");
+    app.debug("Session ready. Use prompt below or sidebar controls.");
+
+    // Theme Switcher
+    document.querySelectorAll("#theme-controls .wb-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("#theme-controls .wb-btn").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        app.setTheme(btn.dataset.theme);
+      });
+    });
+
+    // Retro CRT Toggle
+    document.getElementById("chk-crt")?.addEventListener("change", (e) => {
+      app.toggleCRT(e.target.checked);
+    });
+
+    // Typewriter Plugin Toggle
+    document.getElementById("chk-typewriter")?.addEventListener("change", (e) => {
+      if (e.target.checked) {
+        app.activatePlugin("typewriter");
+        app.activePlugins.get("typewriter")?.type("Typewriter effect enabled seamlessly by VessertApp.", 40);
+      }
+    });
+
+    // Inspector Plugin Toggle
+    document.getElementById("chk-inspector")?.addEventListener("change", (e) => {
+      if (e.target.checked) {
+        app.activatePlugin("inspector");
+        app.info("Inspector panel activated.");
+      }
+    });
+
+    // Preset Buttons
+    document.querySelectorAll("#preset-controls .wb-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const p = btn.dataset.preset;
+        app.info(`Environment preset [${p.toUpperCase()}] loaded into VessertApp.`);
+      });
+    });
+
+    // Simulation Buttons
+    document.getElementById("btn-gen-info")?.addEventListener("click", () => app.info("Database connection established pool=4"));
+    document.getElementById("btn-gen-warn")?.addEventListener("click", () => app.warn("Memory buffer reached 78% threshold"));
+    document.getElementById("btn-gen-error")?.addEventListener("click", () => app.error("Uncaught TypeError: Failed to resolve remote host"));
+    document.getElementById("btn-gen-debug")?.addEventListener("click", () => app.debug("Packet trace: [SYN, ACK] seq=1890 ack=384"));
+
+    // Action Header
+    document.getElementById("btn-demo-burst")?.addEventListener("click", () => {
+      for (let i = 1; i <= 20; i++) {
+        const types = ["log", "info", "warn", "debug"];
+        const t = types[i % types.length];
+        app[t](`Burst Event #${i}: Telemetry stream packet validated at ${new Date().toISOString()}`);
+      }
+    });
+
+    document.getElementById("btn-demo-bench")?.addEventListener("click", () => {
+      const start = performance.now();
+      for (let i = 1; i <= 1000; i++) {
+        app.log(`Bench record ${i} - timestamp: ${Date.now()}`);
+      }
+      const duration = (performance.now() - start).toFixed(2);
+      app.info(`⚡ Benchmark complete: 1,000 log records written and rendered in ${duration}ms!`);
+    });
+
+    document.getElementById("btn-export-json")?.addEventListener("click", () => {
+      const json = app.export("json");
+      const blob = new Blob([json], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "vessert-master-logs.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    document.getElementById("btn-clear-all")?.addEventListener("click", () => app.clear());
+  </script>
+</body>
+</html>
