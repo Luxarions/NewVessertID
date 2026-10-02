@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>VessertID — Automated Test Suite & Runner</title>
+  <link rel="stylesheet" href="./example.css" />
+  <style>
+    .test-viewport {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .test-toolbar {
+      height: 52px;
+      min-height: 52px;
+      background: #0f1624;
+      border-bottom: 1px solid #1e2c44;
+      padding: 0 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .test-stats-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+    }
+
+    .badge-pill {
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 11px;
+    }
+    .badge-pass {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid #22c55e;
+      color: #4ade80;
+    }
+    .badge-fail {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid #ef4444;
+      color: #f87171;
+    }
+    .badge-total {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid #38bdf8;
+      color: #38bdf8;
+    }
+
+    .test-btn {
+      background: #1e293b;
+      border: 1px solid #334155;
+      color: #f8fafc;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .test-btn:hover {
+      background: #2563eb;
+      border-color: #3b82f6;
+    }
+
+    #console-mount {
+      flex: 1 1 0;
+      min-height: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body class="example">
+  <!-- Top Navigation Header -->
+  <header class="example-header">
+    <a href="./index.html">← Gallery</a>
+    <h1 style="font-size: 13px;">Automated Test Suite Runner</h1>
+    <span style="font-size: 11px; color: #64748b;">Universal CI/CD & Browser Verification</span>
+    <div class="example-actions">
+      <a href="./workbench.html" style="color: #38bdf8; text-decoration: none; font-size: 12px; font-weight: 600;">Workbench ➔</a>
+    </div>
+  </header>
+
+  <div class="example-body">
+    <div class="test-viewport">
+      <!-- Toolbar with Live Stats and Re-run Button -->
+      <div class="test-toolbar">
+        <div class="test-stats-row">
+          <span style="color: #94a3b8;">Status: <strong id="run-status" style="color: #fbbf24;">RUNNING...</strong></span>
+          <span class="badge-pill badge-total" id="badge-total">0 Tests</span>
+          <span class="badge-pill badge-pass" id="badge-passed">0 Passed</span>
+          <span class="badge-pill badge-fail" id="badge-failed" style="display: none;">0 Failed</span>
+          <span style="color: #64748b;" id="stat-time">0.00ms</span>
+        </div>
+        <button class="test-btn" id="btn-rerun">🔄 Re-run All Tests</button>
+      </div>
+
+      <!-- Mount Target for VessertApp Console -->
+      <div id="console-mount"></div>
+    </div>
+  </div>
+
+  <script type="module">
+    import { VessertApp } from "./jsm/app/VessertApp.js";
+    import { runner } from "../test/runner.js";
+
+    // Preload suites
+    await import("../test/suites/console.test.js");
+    await import("../test/suites/channels.test.js");
+    await import("../test/suites/profiler.test.js");
+    await import("../test/suites/repl.test.js");
+    await import("../test/suites/api-auditor.test.js");
+
+    const app = new VessertApp({
+      container: document.getElementById("console-mount"),
+      title: "Test Execution Terminal",
+      badge: "TEST-RUNNER",
+      theme: "dark"
+    });
+
+    const runTestsInApp = async () => {
+      app.clear();
+      document.getElementById("run-status").textContent = "RUNNING...";
+      document.getElementById("run-status").style.color = "#fbbf24";
+
+      const reporter = {
+        log: (msg) => app.log(msg),
+        success: (msg) => app.info(msg),
+        error: (msg) => app.error(msg),
+        header: (msg) => app.log(msg)
+      };
+
+      const stats = await runner.run(reporter);
+
+      // Update Toolbar Stats
+      document.getElementById("badge-total").textContent = `${stats.totalTests} Tests`;
+      document.getElementById("badge-passed").textContent = `${stats.passed} Passed`;
+      document.getElementById("stat-time").textContent = `${stats.durationMs}ms`;
+
+      const failBadge = document.getElementById("badge-failed");
+      const statusEl = document.getElementById("run-status");
+
+      if (stats.failed > 0) {
+        failBadge.style.display = "inline-block";
+        failBadge.textContent = `${stats.failed} Failed`;
+        statusEl.textContent = "FAILED";
+        statusEl.style.color = "#ef4444";
+      } else {
+        failBadge.style.display = "none";
+        statusEl.textContent = "ALL PASSED ✓";
+        statusEl.style.color = "#22c55e";
+      }
+    };
+
+    // Auto-run on mount
+    runTestsInApp();
+
+    document.getElementById("btn-rerun")?.addEventListener("click", () => {
+      runTestsInApp();
+    });
+  </script>
+</body>
+</html>

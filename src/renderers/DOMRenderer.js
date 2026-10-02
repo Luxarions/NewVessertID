@@ -12,14 +12,17 @@ class DOMRenderer {
     /** @type {HTMLElement|null} */ this.list = null;
   }
 
-  /** @param {HTMLElement} [parent=document.body] @returns {void} */
-  mount(parent = document.body) {
+  /** @param {HTMLElement} [parent] @returns {void} */
+  mount(parent = null) {
+    if (typeof document === 'undefined') return;
+    const targetParent = parent || document.body;
+    if (!targetParent) return;
     this.root = document.createElement('div');
     this.root.className = 'vessert-console';
     this.list = document.createElement('div');
     this.list.className = 'vessert-console-list';
     this.root.appendChild(this.list);
-    parent.appendChild(this.root);
+    targetParent.appendChild(this.root);
   }
 
   /** @returns {void} */

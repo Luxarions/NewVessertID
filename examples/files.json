@@ -6,6 +6,12 @@
     "tag": "console"
   },
   {
+    "name": "test-runner.html",
+    "title": "Automated Test Suite Runner",
+    "description": "Real-time automated unit & integration test runner with live badges",
+    "tag": "console"
+  },
+  {
     "name": "console_basic.html",
     "title": "Basic Console",
     "description": "Default console with dark theme",

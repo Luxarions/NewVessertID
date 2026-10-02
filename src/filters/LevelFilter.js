@@ -6,7 +6,7 @@
 /** Filters entries by level. */
 class LevelFilter {
   /** @param {Set<string>} [enabled] - Enabled levels. */
-  constructor(enabled = new Set(['log', 'info', 'warn', 'error'])) {
+  constructor(enabled = new Set(['trace', 'debug', 'log', 'info', 'warn', 'error', 'fatal'])) {
     /** @type {Set<string>} */ this.enabled = enabled;
   }
   /** @param {Object} entry @returns {boolean} */ pass(entry) { return this.enabled.has(entry.level); }

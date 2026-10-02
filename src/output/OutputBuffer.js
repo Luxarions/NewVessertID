@@ -16,6 +16,7 @@ class OutputBuffer {
   /** @param {number} [n=1] @returns {Object[]} */ last(n = 1) { return this.entries.slice(-n); }
   /** @returns {void} */ clear() { this.entries = []; }
   /** @returns {number} */ size() { return this.entries.length; }
+  /** @returns {number} */ get length() { return this.entries.length; }
 }
 
 export { OutputBuffer };
