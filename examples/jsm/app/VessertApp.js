@@ -4,7 +4,7 @@
  * Single entry point for building complete VessertID console applications.
  */
 
-import { Console } from '../../src/Vessert.js';
+import { Console } from '../../../src/Vessert.js';
 import { ConsoleUI } from '../ui/ConsoleUI.js';
 import * as Addons from '../Addons.js';
 
