@@ -9,6 +9,9 @@ export { ConsoleState } from './core/ConsoleState.js';
 export { ConsoleContext } from './core/ConsoleContext.js';
 export { ConsoleRegistry, registry } from './core/ConsoleRegistry.js';
 export { ConsoleLifecycle } from './core/ConsoleLifecycle.js';
+export { Channel } from './core/Channel.js';
+export { Profiler } from './core/Profiler.js';
+export { SinkRouter } from './core/SinkRouter.js';
 
 export { ConsoleParser } from './parsers/ConsoleParser.js';
 export { ThemeParser } from './parsers/ThemeParser.js';

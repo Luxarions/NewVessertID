@@ -7,10 +7,10 @@
 export const REVISION = '1.0.0';
 
 /** @constant {Record<string, string>} */
-export const LEVELS = { LOG: 'log', INFO: 'info', WARN: 'warn', ERROR: 'error', DEBUG: 'debug', TRACE: 'trace' };
+export const LEVELS = { LOG: 'log', INFO: 'info', WARN: 'warn', ERROR: 'error', FATAL: 'fatal', DEBUG: 'debug', TRACE: 'trace' };
 
 /** @constant {string[]} */
-export const LEVEL_ORDER = ['trace', 'debug', 'log', 'info', 'warn', 'error'];
+export const LEVEL_ORDER = ['trace', 'debug', 'log', 'info', 'warn', 'error', 'fatal'];
 
 /** @constant {Record<string, string>} */
 export const LAYOUT_POSITIONS = { INLINE: 'inline', OVERLAY: 'overlay', DOCKED: 'docked', FULLSCREEN: 'fullscreen' };

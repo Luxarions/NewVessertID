@@ -18,6 +18,7 @@ import { CopyManager } from '../export/CopyManager.js';
 import { ConsoleRenderer } from '../renderers/ConsoleRenderer.js';
 import { EventBus } from '../events/EventBus.js';
 import { EVENTS } from '../constants.js';
+import { SinkRouter } from './SinkRouter.js';
 
 /**
  * The engine that binds state, buffer, managers, and renderer.
@@ -42,6 +43,7 @@ class ConsoleEngine extends EventDispatcher {
     this.search = new SearchEngine();
     this.exporter = new Exporter(this.buffer);
     this.copier = new CopyManager(this.buffer);
+    this.sinkRouter = new SinkRouter();
     /** @type {ConsoleRenderer|null} */
     this.renderer = null;
   }
@@ -67,15 +69,17 @@ class ConsoleEngine extends EventDispatcher {
    *
    * @param {string} level - Level name.
    * @param {*[]} args - Args.
+   * @param {Object} [metadata={}] - Optional metadata (channel, caller, etc).
    * @returns {void}
    */
-  write(level, args) {
+  write(level, args, metadata = {}) {
     const message = this.formatter.format(level, args);
-    const entry = { level, message, timestamp: Date.now(), raw: args };
+    const entry = { level, message, timestamp: Date.now(), raw: args, ...metadata };
     if (!this.levels.isEnabled(level)) return;
     if (!this.filters.pass(entry)) return;
     this.buffer.push(entry);
     this.renderer?.write(entry);
+    this.sinkRouter.route(entry);
     this.dispatchEvent({ type: EVENTS[level.toUpperCase()] ?? level, entry });
   }
 

@@ -110,7 +110,7 @@
       top: 0;
       right: 0;
       bottom: 0;
-      width: min(390px, 92vw);
+      width: min(420px, 94vw);
       max-width: 100%;
       height: 100%;
       background: #0d131f;
@@ -174,7 +174,7 @@
       padding: 16px;
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 16px;
     }
     .wb-drawer-body::-webkit-scrollbar {
       width: 5px;
@@ -270,7 +270,7 @@
       cursor: pointer;
     }
 
-    /* Generator Action Grid */
+    /* Action Grids */
     .wb-action-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -322,7 +322,7 @@
   <header class="example-header">
     <a href="./index.html">← Gallery</a>
     <h1 style="font-size: 13px;">Master Workbench</h1>
-    <span class="wb-header-sub" style="font-size: 11px; color: #64748b;">Unified VessertApp</span>
+    <span class="wb-header-sub" style="font-size: 11px; color: #64748b;">Unified Observability</span>
 
     <!-- Master Studio Pill Trigger -->
     <button id="btn-open-studio" class="wb-studio-pill" title="Open Studio Controls & Presets">
@@ -368,12 +368,56 @@
           <div class="wb-card" style="background: #0f1826; border-color: #243550;">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #94a3b8;">SYSTEM ENGINE:</span>
-              <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #22c55e; font-weight: 700;">● VESSERT ONLINE</span>
+              <span style="font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #22c55e; font-weight: 700;">● OBSERVABILITY ONLINE</span>
             </div>
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-family: 'JetBrains Mono', monospace; color: #64748b;">
-              <span>ORCHESTRATOR:</span>
-              <span style="color: #38bdf8;">VessertApp (Integrated)</span>
+              <span>ROUTER SINK:</span>
+              <span style="color: #38bdf8;">In-Engine UI + DevTools</span>
             </div>
+          </div>
+
+          <!-- Subsystem Channels (Game Engine Pattern) -->
+          <div class="wb-card">
+            <div class="wb-card-title">
+              <span>🎮 Subsystem Channels</span>
+              <span style="font-size: 10px; color: #94a3b8;">DSRT Architecture</span>
+            </div>
+            <div class="wb-action-grid">
+              <button class="wb-action-btn" id="btn-ch-renderer" style="color: #38bdf8;">🎨 RENDERER</button>
+              <button class="wb-action-btn" id="btn-ch-physics" style="color: #fbbf24;">⚡ PHYSICS</button>
+              <button class="wb-action-btn" id="btn-ch-audio" style="color: #a78bfa;">🔊 AUDIO</button>
+              <button class="wb-action-btn" id="btn-ch-core" style="color: #34d399;">⚙️ CORE</button>
+            </div>
+          </div>
+
+          <!-- Advanced Console Operations (Table, Dir, Time, Assert) -->
+          <div class="wb-card">
+            <div class="wb-card-title">
+              <span>📊 Advanced Console Ops</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <button class="wb-action-btn" id="btn-op-table" style="color: #38bdf8; justify-content: center;">
+                📋 console.table(SceneEntities)
+              </button>
+              <button class="wb-action-btn" id="btn-op-dir" style="color: #c084fc; justify-content: center;">
+                🔍 console.dir(TelemetryStats)
+              </button>
+              <div class="wb-action-grid">
+                <button class="wb-action-btn" id="btn-op-time">⏱️ time / timeEnd</button>
+                <button class="wb-action-btn" id="btn-op-assert">⚖️ assert(fps > 30)</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sinks & DevTools Mirroring -->
+          <div class="wb-card">
+            <div class="wb-card-title">
+              <span>🛰️ Multi-Sink Routing</span>
+            </div>
+            <label class="wb-toggle-row">
+              <span>Mirror to Browser DevTools (F12)</span>
+              <input type="checkbox" id="chk-browser-mirror" />
+            </label>
           </div>
 
           <!-- Theme Palette Selection -->
@@ -439,33 +483,7 @@
             </div>
           </div>
 
-          <!-- Runtime Presets -->
-          <div class="wb-card">
-            <div class="wb-card-title">
-              <span>📦 Environment Presets</span>
-            </div>
-            <div class="wb-action-grid" id="preset-grid">
-              <button class="wb-action-btn" data-preset="node">🟢 Node.js</button>
-              <button class="wb-action-btn" data-preset="bun">🥟 Bun</button>
-              <button class="wb-action-btn" data-preset="chrome">🌐 Chrome</button>
-              <button class="wb-action-btn" data-preset="vscode">💻 VS Code</button>
-            </div>
-          </div>
-
-          <!-- Live Event Generator -->
-          <div class="wb-card">
-            <div class="wb-card-title">
-              <span>🧪 Event Generator</span>
-            </div>
-            <div class="wb-action-grid">
-              <button class="wb-action-btn" id="gen-info" style="color: #38bdf8;">ℹ Info Event</button>
-              <button class="wb-action-btn" id="gen-warn" style="color: #fbbf24;">⚠ Warn Notice</button>
-              <button class="wb-action-btn" id="gen-error" style="color: #f87171;">✖ Error Trace</button>
-              <button class="wb-action-btn" id="gen-debug" style="color: #c084fc;">🐞 Debug Dump</button>
-            </div>
-          </div>
-
-          <!-- Diagnostics -->
+          <!-- Performance & Tools -->
           <div class="wb-card">
             <div class="wb-card-title">
               <span>⚡ Performance & Tools</span>
@@ -488,15 +506,50 @@
     const app = new VessertApp({
       container: document.getElementById("app-container"),
       title: "Master Console Workstation",
-      badge: "VESSERT-APP",
+      badge: "ENGINE-CORE",
       theme: "dark",
       persist: true
     });
 
     // Initial Welcome Message
-    app.info("🚀 VessertID Master Workbench Initialized");
-    app.log("Core Engine (src/) + Visual UI (jsm/ui/) + Modular Addons (jsm/) seamlessly connected.");
-    app.debug("Tap [🎛️ Studio Controls] above to switch themes, toggle addons, or test presets.");
+    app.info("🚀 VessertID Observability & Engine Console Initialized");
+    app.log("Connected Subsystem Channels: [RENDERER, PHYSICS, AUDIO, CORE]");
+    app.debug("Type any JS expression or engine command in the prompt bar (e.g. 2 + 3, help, stats, entities).");
+
+    // Preload raw data sets
+    let sceneEntities = [];
+    let telemetryStats = {};
+
+    fetch("./data/engine-scene.json")
+      .then(res => res.json())
+      .then(data => {
+        sceneEntities = data;
+        app.repl.bind("entities", sceneEntities);
+      })
+      .catch(() => {});
+
+    fetch("./data/telemetry-sample.json")
+      .then(res => res.json())
+      .then(data => {
+        telemetryStats = data;
+        app.repl.bind("telemetry", telemetryStats);
+      })
+      .catch(() => {});
+
+    // Register Custom Engine Commands for PromptBar REPL
+    app.registerCommand("stats", () => {
+      app.dir(telemetryStats);
+      return "Engine telemetry inspected above.";
+    }, "Display real-time engine telemetry stats");
+
+    app.registerCommand("entities", () => {
+      app.table(sceneEntities, ["id", "name", "type", "layer", "active"]);
+      return `Loaded ${sceneEntities.length} entities from scene graph.`;
+    }, "Display active scene graph entities in table");
+
+    app.registerCommand("fps", () => {
+      return `Engine Render Rate: 60.0 FPS | FrameTime: 16.66ms`;
+    }, "Display current engine FPS");
 
     // Sync pill theme badge
     const updateThemeBadge = (name) => {
@@ -524,14 +577,73 @@
     btnClose?.addEventListener("click", closeDrawer);
     backdrop?.addEventListener("click", closeDrawer);
 
-    // Escape key closes drawer
     window.addEventListener("keydown", (e) => {
       if (e.key === "Escape" && drawer.classList.contains("open")) {
         closeDrawer();
       }
     });
 
-    // 3. Theme Switcher
+    // 3. Subsystem Channel Triggers
+    const gfxChannel = app.channel("RENDERER");
+    const physChannel = app.channel("PHYSICS");
+    const audioChannel = app.channel("AUDIO");
+    const coreChannel = app.channel("CORE");
+
+    document.getElementById("btn-ch-renderer")?.addEventListener("click", () => {
+      gfxChannel.info("Shader compiled: PBR_Opaque.frag [14 programs active, 142 draw calls]");
+    });
+
+    document.getElementById("btn-ch-physics")?.addEventListener("click", () => {
+      physChannel.warn("RigidBody collision solver resolved 12 contact points (dt=16.6ms)");
+    });
+
+    document.getElementById("btn-ch-audio")?.addEventListener("click", () => {
+      audioChannel.info("AudioContext sampleRate: 48000Hz | 6 active voices streaming");
+    });
+
+    document.getElementById("btn-ch-core")?.addEventListener("click", () => {
+      coreChannel.log("Memory garbage collection tick completed: 38.4MB heap allocated");
+    });
+
+    // 4. Advanced Console Operations (Table, Dir, Time, Assert)
+    document.getElementById("btn-op-table")?.addEventListener("click", () => {
+      if (sceneEntities.length > 0) {
+        app.info("▼ console.table(SceneEntities)");
+        app.table(sceneEntities, ["id", "name", "type", "layer", "active"]);
+      } else {
+        app.warn("Entities loading... try again in a second.");
+      }
+    });
+
+    document.getElementById("btn-op-dir")?.addEventListener("click", () => {
+      app.info("▼ console.dir(TelemetryStats)");
+      app.dir(telemetryStats);
+    });
+
+    document.getElementById("btn-op-time")?.addEventListener("click", () => {
+      app.time("Physics Substep Simulation");
+      let x = 0;
+      for (let i = 0; i < 50000; i++) x += Math.sqrt(i);
+      app.timeEnd("Physics Substep Simulation");
+    });
+
+    document.getElementById("btn-op-assert")?.addEventListener("click", () => {
+      const currentFPS = 60;
+      app.assert(currentFPS >= 60, "FPS dropped below 60 target!");
+      app.assert(currentFPS < 30, `Target FPS threshold failed: ${currentFPS} is not < 30`);
+    });
+
+    // 5. Browser Mirroring Toggle
+    document.getElementById("chk-browser-mirror")?.addEventListener("change", (e) => {
+      app.setBrowserMirror(e.target.checked);
+      if (e.target.checked) {
+        app.info("🛰️ Browser DevTools Mirroring ENABLED. Open F12 to view mirrored logs.");
+      } else {
+        app.info("🛰️ Browser DevTools Mirroring DISABLED.");
+      }
+    });
+
+    // 6. Theme Switcher
     document.querySelectorAll("#theme-grid .wb-theme-btn").forEach(btn => {
       btn.addEventListener("click", () => {
         document.querySelectorAll("#theme-grid .wb-theme-btn").forEach(b => b.classList.remove("active"));
@@ -542,7 +654,7 @@
       });
     });
 
-    // 4. Addons & Effects
+    // 7. Addons & Effects
     document.getElementById("chk-crt")?.addEventListener("change", (e) => {
       app.toggleCRT(e.target.checked);
       if (e.target.checked) app.info("CRT Phosphor scanline filter active.");
@@ -570,29 +682,7 @@
       }
     });
 
-    // 5. Presets
-    document.querySelectorAll("#preset-grid .wb-action-btn").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const p = btn.dataset.preset;
-        app.info(`Environment preset [${p.toUpperCase()}] profile active.`);
-      });
-    });
-
-    // 6. Live Event Emitter
-    document.getElementById("gen-info")?.addEventListener("click", () => {
-      app.info("Service discovery initialized [cluster: asia-southeast1]");
-    });
-    document.getElementById("gen-warn")?.addEventListener("click", () => {
-      app.warn("Disk buffer latency 142ms exceeded target threshold 80ms");
-    });
-    document.getElementById("gen-error")?.addEventListener("click", () => {
-      app.error("ConnectionRefused: 127.0.0.1:5432 - Database pool unreachable");
-    });
-    document.getElementById("gen-debug")?.addEventListener("click", () => {
-      app.debug("Frame heap allocation: { used: '34.2MB', limit: '128MB', gc: 2 }");
-    });
-
-    // 7. Actions & Benchmarks
+    // 8. Actions & Benchmarks
     const runBurst = () => {
       for (let i = 1; i <= 20; i++) {
         const types = ["log", "info", "warn", "debug"];

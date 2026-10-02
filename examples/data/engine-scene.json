@@ -1,0 +1,92 @@
+[
+  {
+    "id": "entity_01",
+    "name": "MainCamera",
+    "type": "Camera",
+    "layer": "Default",
+    "position": [0, 1.8, -5],
+    "fov": 60,
+    "active": true
+  },
+  {
+    "id": "entity_02",
+    "name": "DirectionalSun",
+    "type": "Light",
+    "layer": "Lighting",
+    "position": [10, 50, 20],
+    "intensity": 2.5,
+    "active": true
+  },
+  {
+    "id": "entity_03",
+    "name": "HeroPlayer",
+    "type": "Pawn",
+    "layer": "Characters",
+    "position": [0, 0, 0],
+    "health": 100,
+    "active": true
+  },
+  {
+    "id": "entity_04",
+    "name": "LandscapeTerrain",
+    "type": "StaticMesh",
+    "layer": "Environment",
+    "position": [0, -1, 0],
+    "triangles": 32000,
+    "active": true
+  },
+  {
+    "id": "entity_05",
+    "name": "BossGolem",
+    "type": "Enemy",
+    "layer": "Characters",
+    "position": [14.5, 0, 8.2],
+    "health": 2500,
+    "active": true
+  },
+  {
+    "id": "entity_06",
+    "name": "TorchFlameParticles",
+    "type": "VFX",
+    "layer": "Effects",
+    "position": [2.4, 1.2, 3.1],
+    "rate": 150,
+    "active": true
+  },
+  {
+    "id": "entity_07",
+    "name": "DungeonWallRigidBody",
+    "type": "PhysicsCollider",
+    "layer": "Collision",
+    "position": [-5, 0, 12],
+    "mass": 0,
+    "active": true
+  },
+  {
+    "id": "entity_08",
+    "name": "AmbientCaveAudio",
+    "type": "AudioEmitter",
+    "layer": "Audio",
+    "position": [0, 5, 0],
+    "volume": 0.8,
+    "active": true
+  },
+  {
+    "id": "entity_09",
+    "name": "PostProcessColorGrading",
+    "type": "Volume",
+    "layer": "PostProcessing",
+    "position": [0, 0, 0],
+    "bloom": true,
+    "active": true
+  },
+  {
+    "id": "entity_10",
+    "name": "EnemyNavMeshBounds",
+    "type": "Navigation",
+    "layer": "AI",
+    "position": [0, 0, 0],
+    "nodes": 450,
+    "active": true
+  }
+]

@@ -1,11 +1,14 @@
 /**
  * @file VessertApp - Unified Application Shell & Prototype Orchestrator.
- * Connects Core Engine (src/), Visual UI Layer (jsm/ui/), and Addons (jsm/).
+ * Connects Core Engine (src/), Visual UI Layer (jsm/ui/), Addons (jsm/),
+ * Subsystem Channels, Profiler, REPL, and Multi-Sink Router.
  * Single entry point for building complete VessertID console applications.
  */
 
 import { Console } from '../../../src/Vessert.js';
 import { ConsoleUI } from '../ui/ConsoleUI.js';
+import { REPL } from '../evaluator/REPL.js';
+import { BrowserSink } from '../sinks/BrowserSink.js';
 import * as Addons from '../Addons.js';
 
 export class VessertApp {
@@ -19,6 +22,7 @@ export class VessertApp {
    * @param {string} [options.keymap='default'] - Keymap preset.
    * @param {string} [options.locale='en'] - Locale preset.
    * @param {boolean} [options.retroCRT=false] - CRT scanline phosphor effect.
+   * @param {boolean} [options.browserMirror=false] - Mirror logs to window.console.
    * @param {boolean} [options.persist=true] - Save theme and history to localStorage.
    * @param {string[]|Object[]} [options.plugins=[]] - List of plugins/addons to activate.
    */
@@ -32,6 +36,7 @@ export class VessertApp {
       keymap: options.keymap || 'default',
       locale: options.locale || 'en',
       retroCRT: options.retroCRT || false,
+      browserMirror: options.browserMirror || false,
       persist: options.persist !== false,
       plugins: options.plugins || [],
       ...options
@@ -47,7 +52,14 @@ export class VessertApp {
       locale: this.options.locale
     });
 
-    // 2. Initialize Visual UI Layer (jsm/ui/)
+    // 2. Initialize REPL and Browser Sink
+    this.repl = new REPL(this.console);
+    this.browserSink = new BrowserSink(this.console);
+    if (this.options.browserMirror) {
+      this.browserSink.enable();
+    }
+
+    // 3. Initialize Visual UI Layer (jsm/ui/)
     this.ui = new ConsoleUI(this.console, {
       container: this.options.container,
       title: this.options.title,
@@ -56,10 +68,13 @@ export class VessertApp {
       retroCRT: this.options.retroCRT
     });
 
-    // 3. Register Plugins
+    // Expose `app` global shorthand in REPL
+    this.repl.bind('app', this);
+
+    // 4. Register Plugins
     this._initPlugins(this.options.plugins);
 
-    // 4. Persistence setup
+    // 5. Persistence setup
     if (this.options.persist) {
       this.console.engine?.addEventListener?.('theme', (e) => {
         try { localStorage.setItem('vessert_theme', e.name); } catch (_) {}
@@ -130,6 +145,151 @@ export class VessertApp {
     return this;
   }
 
+  /* ---------------- Subsystem Channels (Game Engine Pattern) ---------------- */
+
+  /**
+   * Acquire a dedicated subsystem channel (e.g. 'RENDERER', 'PHYSICS', 'AUDIO').
+   * @param {string} name
+   */
+  channel(name) {
+    return this.console.channel(name);
+  }
+
+  /**
+   * Alias for channel()
+   * @param {string} name
+   */
+  scope(name) {
+    return this.console.scope(name);
+  }
+
+  /* ---------------- Advanced Console API Operations ---------------- */
+
+  /**
+   * Display tabular data formatted as an ASCII/HTML grid.
+   * @param {Array<Object>|Object} data
+   * @param {string[]} [columns]
+   */
+  table(data, columns) {
+    this.console.table(data, columns);
+    return this;
+  }
+
+  /**
+   * Interactive object inspector.
+   * @param {Object} obj
+   */
+  dir(obj) {
+    this.console.dir(obj);
+    return this;
+  }
+
+  /**
+   * Performance profiler timer start.
+   * @param {string} [label]
+   */
+  time(label) {
+    this.console.time(label);
+    return this;
+  }
+
+  /**
+   * Performance profiler timer stop & log.
+   * @param {string} [label]
+   */
+  timeEnd(label) {
+    this.console.timeEnd(label);
+    return this;
+  }
+
+  /**
+   * Performance profiler timer checkpoint log.
+   * @param {string} [label]
+   */
+  timeLog(label, ...args) {
+    this.console.timeLog(label, ...args);
+    return this;
+  }
+
+  /**
+   * Assertion checker; logs error if false.
+   * @param {boolean} condition
+   * @param {...*} args
+   */
+  assert(condition, ...args) {
+    this.console.assert(condition, ...args);
+    return this;
+  }
+
+  /**
+   * Execution counter.
+   * @param {string} [label]
+   */
+  count(label) {
+    this.console.count(label);
+    return this;
+  }
+
+  /**
+   * Execution counter reset.
+   * @param {string} [label]
+   */
+  countReset(label) {
+    this.console.countReset(label);
+    return this;
+  }
+
+  /**
+   * Group logs.
+   * @param {string} [label]
+   */
+  group(label) {
+    this.console.group(label);
+    return this;
+  }
+
+  groupEnd() {
+    this.console.groupEnd();
+    return this;
+  }
+
+  /* ---------------- Multi-Sink & Browser Mirroring ---------------- */
+
+  /**
+   * Enable/disable mirroring to browser DevTools (F12).
+   * @param {boolean} enable
+   */
+  setBrowserMirror(enable) {
+    if (enable) {
+      this.browserSink.enable();
+    } else {
+      this.browserSink.disable();
+    }
+    return this;
+  }
+
+  /* ---------------- Command Execution & REPL ---------------- */
+
+  /**
+   * Register a custom engine command.
+   * @param {string} name
+   * @param {Function} handler
+   * @param {string} [description]
+   */
+  registerCommand(name, handler, description) {
+    this.console.registerCommand(name, handler, description);
+    return this;
+  }
+
+  /**
+   * Safely evaluate a command or expression.
+   * @param {string} input
+   */
+  evaluate(input) {
+    this.console.evaluate(input);
+    return this;
+  }
+
   /* ---------------- High-Level Integrated Logging APIs ---------------- */
 
   log(...args) {
@@ -149,6 +309,11 @@ export class VessertApp {
 
   error(...args) {
     this.console.error(...args);
+    return this;
+  }
+
+  fatal(...args) {
+    this.console.fatal(...args);
     return this;
   }
 
@@ -226,6 +391,7 @@ export class VessertApp {
       if (typeof plugin.destroy === 'function') plugin.destroy();
     }
     this.activePlugins.clear();
+    this.browserSink.disable();
     this.ui.destroy();
     this.console.destroy();
   }

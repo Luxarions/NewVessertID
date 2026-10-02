@@ -1,0 +1,37 @@
+{
+  "engine": "DSRT / Vessert Engine Core",
+  "version": "1.0.0-rc4",
+  "timestamp": 1727856300000,
+  "metrics": {
+    "fps": 60.0,
+    "frameTimeMs": 16.66,
+    "drawCalls": 142,
+    "triangles": 48200,
+    "points": 1500,
+    "lines": 340
+  },
+  "memory": {
+    "heapUsedMB": 38.4,
+    "heapTotalMB": 128.0,
+    "gpuVramAllocatedMB": 216.5,
+    "texturesCount": 42,
+    "geometriesCount": 68
+  },
+  "subsystems": {
+    "renderer": {
+      "backend": "WebGL2",
+      "shaderPrograms": 14,
+      "vsync": true
+    },
+    "physics": {
+      "solver": "Verlet/RigidBody",
+      "activeBodies": 34,
+      "collisionPairs": 12
+    },
+    "audio": {
+      "state": "running",
+      "activeVoices": 6,
+      "sampleRate": 48000
+    }
+  }
+}

@@ -30,15 +30,19 @@ export class PromptBar {
       this.history.push(cmd);
       this.historyIndex = this.history.length;
 
-      this.console.log(`❯ ${cmd}`);
-      try {
-        const c = this.console; // expose `c` shorthand to evaluation
-        const result = eval(cmd);
-        if (result !== undefined) {
-          this.console.info(`❮ ${typeof result === 'object' ? JSON.stringify(result, null, 2) : String(result)}`);
+      if (typeof this.console.evaluate === 'function') {
+        this.console.evaluate(cmd);
+      } else {
+        this.console.log(`❯ ${cmd}`);
+        try {
+          const c = this.console;
+          const result = eval(cmd);
+          if (result !== undefined) {
+            this.console.info(`❮ ${typeof result === 'object' ? JSON.stringify(result, null, 2) : String(result)}`);
+          }
+        } catch (err) {
+          this.console.error(`Uncaught ${err.name}: ${err.message}`);
         }
-      } catch (err) {
-        this.console.error(`Uncaught ${err.name}: ${err.message}`);
       }
       input.value = '';
     };
