@@ -1,7 +1,7 @@
 /**
  * ConsoleUI - External Master Visual Orchestrator.
  * Combines WindowChrome, Toolbar, Output Viewport, PromptBar, and StatusBar
- * into a complete, professional, visual console workstation.
+ * into a complete, professional, visual console workstation without overflow clipping.
  */
 import { WindowChrome } from './WindowChrome.js';
 import { Toolbar } from './Toolbar.js';
@@ -84,10 +84,33 @@ export class ConsoleUI {
 
     this.wrapper.appendChild(viewportBody);
 
-    // Mount Console Engine renderer into output pane
-    if (this.console.engine?.renderer?.dom) {
-      this.console.engine.renderer.dom.mount(this.outputElement);
+    // Cleanly attach console renderer to output pane
+    const domRenderer = this.console.engine?.renderer?.dom;
+    if (domRenderer) {
+      if (domRenderer.root && domRenderer.root.parentNode) {
+        domRenderer.root.parentNode.removeChild(domRenderer.root);
+      }
+      if (!domRenderer.root) {
+        domRenderer.mount(this.outputElement);
+      } else {
+        this.outputElement.appendChild(domRenderer.root);
+      }
     }
+
+    // Auto-scroll handler on output element
+    const scrollToBottom = () => {
+      requestAnimationFrame(() => {
+        if (this.outputElement) {
+          this.outputElement.scrollTop = this.outputElement.scrollHeight;
+        }
+      });
+    };
+    this.console.engine?.addEventListener?.('log', scrollToBottom);
+    this.console.engine?.addEventListener?.('info', scrollToBottom);
+    this.console.engine?.addEventListener?.('warn', scrollToBottom);
+    this.console.engine?.addEventListener?.('error', scrollToBottom);
+    this.console.engine?.addEventListener?.('debug', scrollToBottom);
+    this.console.engine?.addEventListener?.('trace', scrollToBottom);
 
     // 4. Interactive CLI Prompt
     if (this.options.showPrompt) {

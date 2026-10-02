@@ -1,61 +1,89 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=VT323&display=swap');
 
-/* Base Layout for Examples */
-body.example {
+/* Strict Universal Box-Sizing to Prevent Any Overflow / Clipped Content */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Base Viewport Geometry */
+html, body.example {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background: #090d14;
-  color: #e2e8f0;
+  padding: 0;
+  width: 100%;
   height: 100vh;
+  max-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #070a0f;
+  color: #e2e8f0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 }
 
-/* Example Navigation Header */
+/* Top Navigation Bar */
 .example-header {
-  height: 48px;
-  padding: 0 16px;
+  height: 44px;
+  min-height: 44px;
+  max-height: 44px;
+  padding: 0 14px;
   border-bottom: 1px solid #1e2638;
   display: flex;
   gap: 12px;
   align-items: center;
-  background: #0f141d;
+  background: #0e131d;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .example-header a {
   color: #38bdf8;
   text-decoration: none;
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
   gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .example-header a:hover {
   text-decoration: underline;
 }
 .example-header h1 {
   margin: 0;
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 1;
+}
+.example-header span {
+  font-size: 11.5px;
+  color: #94a3b8;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 2;
 }
 .example-actions {
   margin-left: auto;
   display: flex;
-  gap: 8px;
+  gap: 6px;
+  align-items: center;
+  flex-shrink: 0;
 }
 .example-actions button {
   background: #18202e;
   border: 1px solid #2a3449;
   color: #e2e8f0;
-  padding: 5px 12px;
-  border-radius: 5px;
-  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11.5px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.15s ease;
+  white-space: nowrap;
 }
 .example-actions button:hover {
   border-color: #38bdf8;
@@ -63,29 +91,33 @@ body.example {
   background: #202b3d;
 }
 
+/* Main Container: Fits exact remaining vertical space without spill */
 .example-body {
-  padding: 16px;
-  flex: 1;
+  padding: 10px 14px;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
 /* ==========================================================================
-   VessertID Visual Layer: Workbench & Window Chrome
+   VessertID Visual Workbench Window
    ========================================================================== */
 .vessert-workbench-container {
   display: flex;
   flex-direction: column;
+  flex: 1 1 0;
+  min-height: 0;
   height: 100%;
-  border-radius: 10px;
+  max-height: 100%;
+  border-radius: 8px;
   border: 1px solid #242c3d;
   background: #0c1017;
   overflow: hidden;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
   position: relative;
-  transition: all 0.2s ease;
 }
 
 .vessert-workbench-container.fullscreen-mode {
@@ -94,36 +126,44 @@ body.example {
   left: 0;
   width: 100vw;
   height: 100vh;
+  max-height: 100vh;
   z-index: 99999;
   border-radius: 0;
 }
 
-/* 1. Window Chrome */
+/* 1. Window Chrome Header */
 .vessert-window-chrome {
-  height: 38px;
-  background: #131924;
-  border-bottom: 1px solid #202838;
+  height: 36px;
+  min-height: 36px;
+  max-height: 36px;
+  background: #121824;
+  border-bottom: 1px solid #1f2737;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 12px;
   flex-shrink: 0;
   user-select: none;
+  overflow: hidden;
 }
 .vessert-chrome-left {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
 }
 .vessert-dots {
   display: flex;
-  gap: 7px;
+  gap: 6px;
+  flex-shrink: 0;
 }
 .vessert-dot {
   width: 11px;
   height: 11px;
   border-radius: 50%;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .dot-close { background: #ef4444; }
 .dot-min { background: #f59e0b; }
@@ -133,20 +173,31 @@ body.example {
   display: flex;
   align-items: center;
   gap: 8px;
+  min-width: 0;
+  overflow: hidden;
 }
 .vessert-title-text {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 600;
   color: #f1f5f9;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .vessert-badge {
-  font-size: 10px;
-  padding: 2px 6px;
+  font-size: 9.5px;
+  padding: 1.5px 6px;
   background: #1e283a;
   color: #38bdf8;
-  border-radius: 4px;
+  border-radius: 3px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
+  flex-shrink: 0;
+}
+.vessert-chrome-right {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 .vessert-status-pill {
   font-size: 10px;
@@ -165,32 +216,42 @@ body.example {
   box-shadow: 0 0 6px #10b981;
 }
 
-/* 2. Toolbar */
+/* 2. Interactive Toolbar */
 .vessert-ui-toolbar {
-  height: 42px;
+  height: 38px;
+  min-height: 38px;
+  max-height: 38px;
   background: #0f1520;
   border-bottom: 1px solid #1c2434;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
-  gap: 10px;
+  padding: 0 10px;
+  gap: 8px;
   flex-shrink: 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+}
+.vessert-ui-toolbar::-webkit-scrollbar {
+  display: none;
 }
 .vessert-tb-group {
   display: flex;
   gap: 4px;
+  flex-shrink: 0;
 }
 .vessert-tb-btn {
   background: #171f2c;
   border: 1px solid #232d3f;
   color: #94a3b8;
-  padding: 4px 9px;
-  border-radius: 5px;
+  padding: 3.5px 8px;
+  border-radius: 4px;
   font-size: 11px;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 600;
   cursor: pointer;
+  white-space: nowrap;
   transition: all 0.15s ease;
 }
 .vessert-tb-btn:hover {
@@ -199,7 +260,7 @@ body.example {
   border-color: #3b475f;
 }
 .vessert-tb-btn.active {
-  background: rgba(56, 189, 248, 0.14);
+  background: rgba(56, 189, 248, 0.15);
   color: #38bdf8;
   border-color: #38bdf8;
 }
@@ -210,50 +271,57 @@ body.example {
 .tb-debug { color: #a5b4fc; }
 
 .vessert-tb-search {
-  flex: 1;
-  max-width: 260px;
+  flex: 1 1 140px;
+  max-width: 240px;
+  min-width: 100px;
   display: flex;
   align-items: center;
   background: #141b26;
   border: 1px solid #232d3f;
-  border-radius: 6px;
+  border-radius: 5px;
   padding: 0 8px;
-  height: 28px;
+  height: 26px;
+  flex-shrink: 1;
 }
 .vessert-search-icon {
   font-size: 11px;
   opacity: 0.6;
-  margin-right: 6px;
+  margin-right: 5px;
+  flex-shrink: 0;
 }
 .vessert-search-input {
   width: 100%;
   background: transparent;
   border: none;
   outline: none;
-  font-size: 11.5px;
+  font-size: 11px;
   color: #fff;
   font-family: inherit;
 }
 .vessert-tb-actions {
   display: flex;
-  gap: 6px;
+  gap: 5px;
   align-items: center;
+  flex-shrink: 0;
 }
 .vessert-theme-select {
   background: #171f2c;
   border: 1px solid #232d3f;
   color: #e2e8f0;
-  padding: 4px 8px;
-  border-radius: 5px;
+  padding: 3px 6px;
+  border-radius: 4px;
   font-size: 11px;
   font-family: inherit;
   outline: none;
   cursor: pointer;
+  height: 26px;
 }
 
-/* 3. Viewport Body & Output */
+/* 3. Viewport Body & Output Container */
 .vessert-viewport-body {
-  flex: 1;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -261,46 +329,55 @@ body.example {
   background: #090d14;
 }
 .vessert-output-pane {
-  flex: 1;
+  flex: 1 1 0;
+  min-height: 0;
+  height: 100%;
   overflow-y: auto;
-  padding: 12px 14px;
+  overflow-x: hidden;
+  padding: 10px 14px;
   font-family: 'JetBrains Mono', Consolas, monospace;
-  font-size: 12.5px;
-  line-height: 1.6;
+  font-size: 12px;
+  line-height: 1.55;
 }
 .vessert-output-pane::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 .vessert-output-pane::-webkit-scrollbar-track {
   background: transparent;
 }
 .vessert-output-pane::-webkit-scrollbar-thumb {
-  background: #1f2937;
-  border-radius: 4px;
+  background: #242d3d;
+  border-radius: 3px;
 }
 .vessert-output-pane::-webkit-scrollbar-thumb:hover {
-  background: #374151;
+  background: #37445c;
 }
 
-/* Console Lines Standard */
+/* Console Lines */
 .vessert-console {
   background: transparent;
   color: inherit;
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  overflow: visible;
   border: none;
+  width: 100%;
+}
+.vessert-console-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 .vessert-line {
-  padding: 2.5px 6px;
+  padding: 2px 6px;
   white-space: pre-wrap;
   word-break: break-word;
+  overflow-wrap: anywhere;
   border-radius: 3px;
 }
 .vessert-line:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
 }
 .vessert-log   { color: #cbd5e1; }
 .vessert-info  { color: #38bdf8; }
@@ -313,29 +390,34 @@ body.example {
 
 /* 4. Interactive CLI Prompt Bar */
 .vessert-ui-prompt-bar {
-  height: 42px;
+  height: 38px;
+  min-height: 38px;
+  max-height: 38px;
   background: #0e141f;
   border-top: 1px solid #1c2434;
   display: flex;
   align-items: center;
-  padding: 0 14px;
+  padding: 0 12px;
   gap: 8px;
   flex-shrink: 0;
+  overflow: hidden;
 }
 .vessert-prompt-sym {
   color: #38bdf8;
   font-family: 'JetBrains Mono', monospace;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 13.5px;
+  flex-shrink: 0;
 }
 .vessert-prompt-input {
-  flex: 1;
+  flex: 1 1 0;
+  min-width: 80px;
   background: transparent;
   border: none;
   outline: none;
   color: #f8fafc;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12.5px;
+  font-size: 12px;
 }
 .vessert-prompt-input::placeholder {
   color: #475569;
@@ -344,11 +426,12 @@ body.example {
   background: #0284c7;
   border: 1px solid #38bdf8;
   color: #fff;
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 4px;
   font-size: 11px;
   font-weight: 600;
   cursor: pointer;
+  flex-shrink: 0;
 }
 .vessert-prompt-exec:hover {
   background: #0369a1;
@@ -356,46 +439,49 @@ body.example {
 
 /* 5. Telemetry Status Bar */
 .vessert-ui-status-bar {
-  height: 26px;
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
   background: #0a0e16;
-  border-top: 1px solid #1a2230;
+  border-top: 1px solid #18202d;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 14px;
+  padding: 0 12px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 10.5px;
   color: #64748b;
   flex-shrink: 0;
   user-select: none;
+  overflow: hidden;
 }
 .vessert-status-left, .vessert-status-right {
   display: flex;
-  gap: 14px;
+  gap: 12px;
   align-items: center;
+  overflow: hidden;
+  white-space: nowrap;
 }
 .vessert-metric {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 4px;
+  white-space: nowrap;
 }
 .vessert-metric strong {
   color: #e2e8f0;
 }
 .metric-dot {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: #10b981;
 }
 
 /* ==========================================================================
-   Themes Styling for Visual Layer
+   Themes
    ========================================================================== */
-.theme-dracula {
-  border-color: #44475a;
-  background: #282a36;
-}
+.theme-dracula { border-color: #44475a; background: #282a36; }
 .theme-dracula .vessert-window-chrome { background: #21222c; border-color: #44475a; }
 .theme-dracula .vessert-ui-toolbar { background: #21222c; border-color: #44475a; }
 .theme-dracula .vessert-viewport-body { background: #282a36; }
@@ -407,10 +493,7 @@ body.example {
 .theme-dracula .vessert-error { color: #ff5555; }
 .theme-dracula .vessert-debug { color: #bd93f9; }
 
-.theme-nord {
-  border-color: #3b4252;
-  background: #2e3440;
-}
+.theme-nord { border-color: #3b4252; background: #2e3440; }
 .theme-nord .vessert-window-chrome { background: #242933; border-color: #3b4252; }
 .theme-nord .vessert-ui-toolbar { background: #242933; border-color: #3b4252; }
 .theme-nord .vessert-viewport-body { background: #2e3440; }
@@ -422,10 +505,7 @@ body.example {
 .theme-nord .vessert-error { color: #bf616a; }
 .theme-nord .vessert-debug { color: #81a1c1; }
 
-.theme-monokai {
-  border-color: #3e3d32;
-  background: #272822;
-}
+.theme-monokai { border-color: #3e3d32; background: #272822; }
 .theme-monokai .vessert-window-chrome { background: #1e1f1c; border-color: #3e3d32; }
 .theme-monokai .vessert-ui-toolbar { background: #1e1f1c; border-color: #3e3d32; }
 .theme-monokai .vessert-viewport-body { background: #272822; }
@@ -437,10 +517,7 @@ body.example {
 .theme-monokai .vessert-error { color: #f92672; }
 .theme-monokai .vessert-debug { color: #a6e22e; }
 
-.theme-gruvbox {
-  border-color: #504945;
-  background: #282828;
-}
+.theme-gruvbox { border-color: #504945; background: #282828; }
 .theme-gruvbox .vessert-window-chrome { background: #1d2021; border-color: #504945; }
 .theme-gruvbox .vessert-ui-toolbar { background: #1d2021; border-color: #504945; }
 .theme-gruvbox .vessert-viewport-body { background: #282828; }
@@ -454,16 +531,16 @@ body.example {
 
 /* Retro CRT Mode */
 .retro-crt-mode {
-  border: 8px solid #1a221a !important;
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 0 25px rgba(0, 255, 100, 0.2) !important;
-  border-radius: 12px !important;
+  border: 4px solid #1a241a !important;
+  box-shadow: inset 0 0 40px rgba(0,0,0,0.9), 0 0 20px rgba(0, 255, 100, 0.15) !important;
+  border-radius: 8px !important;
   background: radial-gradient(circle at center, #071907 0%, #020702 100%) !important;
 }
 .retro-crt-mode::after {
   content: "";
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.35) 0px, rgba(0,0,0,0.35) 1px, transparent 1px, transparent 3px);
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.3) 0px, rgba(0,0,0,0.3) 1px, transparent 1px, transparent 3px);
   pointer-events: none;
   z-index: 10;
 }
@@ -472,8 +549,8 @@ body.example {
 }
 .retro-crt-mode .vessert-line {
   font-family: 'VT323', monospace !important;
-  font-size: 19px !important;
-  line-height: 1.35 !important;
+  font-size: 18px !important;
+  line-height: 1.3 !important;
   color: #39ff14 !important;
   text-shadow: 0 0 6px rgba(57, 255, 20, 0.6) !important;
 }
@@ -488,4 +565,20 @@ body.example {
 .retro-crt-mode .vessert-info {
   color: #00ffff !important;
   text-shadow: 0 0 6px rgba(0, 255, 255, 0.8) !important;
+}
+
+/* Responsive Rules */
+@media (max-width: 768px) {
+  .example-body {
+    padding: 6px;
+  }
+  .vessert-tb-search {
+    max-width: 120px;
+  }
+  .example-header span {
+    display: none;
+  }
+  .vessert-status-right {
+    display: none;
+  }
 }
