@@ -1,27 +1,491 @@
-body.example { margin: 0; font-family: system-ui, sans-serif; background: #0d1117; color: #c9d1d9; min-height: 100vh; display: flex; flex-direction: column; }
-.example-header { padding: 12px 16px; border-bottom: 1px solid #30363d; display: flex; gap: 12px; align-items: center; background: #161b22; }
-.example-header a { color: #58a6ff; text-decoration: none; font-size: 13px; display: inline-flex; align-items: center; gap: 4px; }
-.example-header h1 { margin: 0; font-size: 14px; font-weight: 500; }
-.example-actions { margin-left: auto; display: flex; gap: 8px; }
-.example-actions button { background: #21262d; border: 1px solid #30363d; color: #c9d1d9; padding: 4px 10px; border-radius: 4px; font-size: 12px; cursor: pointer; }
-.example-actions button:hover { border-color: #58a6ff; color: #fff; }
-.example-body { padding: 24px; flex: 1; }
-.vessert-console { background: #0d1117; color: #c9d1d9; font-family: monospace; font-size: 13px; line-height: 1.5; overflow: auto; border: 1px solid #30363d; border-radius: 6px; }
-.vessert-line { padding: 3px 8px; white-space: pre-wrap; word-break: break-word; }
-.vessert-log   { color: #c9d1d9; }
-.vessert-info  { color: #58a6ff; }
-.vessert-warn  { color: #d29922; }
-.vessert-error { color: #f85149; font-weight: bold; }
-.vessert-debug { color: #8b949e; font-style: italic; }
-.vessert-trace { color: #6e7681; text-decoration: underline; }
-.vessert-line.selected { background: #264f78; }
-.vessert-line.vessert-match { background: #2d333b; }
-.vessert-glitch { animation: vessert-glitch 0.5s linear; }
-@keyframes vessert-glitch { 0% { transform: translate(0,0); } 50% { transform: translate(2px, -2px); } 100% { transform: translate(0,0); } }
-.vessert-scanlines { background-image: repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px); }
-.vessert-chroma { text-shadow: 1px 0 rgba(255,0,0,0.6), -1px 0 rgba(0,255,255,0.6); }
-.vessert-context-menu { position: fixed; background: #161b22; border: 1px solid #30363d; border-radius: 4px; padding: 4px 0; font-size: 13px; z-index: 10001; }
-.vessert-context-menu div { padding: 6px 12px; cursor: pointer; }
-.vessert-context-menu div:hover { background: #21262d; }
-.vessert-inspector { border: 1px solid #30363d; border-radius: 6px; padding: 12px; margin-top: 16px; font-size: 12px; background: #161b22; }
-.vessert-inspector pre { white-space: pre-wrap; word-break: break-word; color: #58a6ff; }
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&family=VT323&display=swap');
+
+/* Base Layout for Examples */
+body.example {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #090d14;
+  color: #e2e8f0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Example Navigation Header */
+.example-header {
+  height: 48px;
+  padding: 0 16px;
+  border-bottom: 1px solid #1e2638;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  background: #0f141d;
+  flex-shrink: 0;
+}
+.example-header a {
+  color: #38bdf8;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.example-header a:hover {
+  text-decoration: underline;
+}
+.example-header h1 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+}
+.example-actions {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.example-actions button {
+  background: #18202e;
+  border: 1px solid #2a3449;
+  color: #e2e8f0;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.example-actions button:hover {
+  border-color: #38bdf8;
+  color: #fff;
+  background: #202b3d;
+}
+
+.example-body {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* ==========================================================================
+   VessertID Visual Layer: Workbench & Window Chrome
+   ========================================================================== */
+.vessert-workbench-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 10px;
+  border: 1px solid #242c3d;
+  background: #0c1017;
+  overflow: hidden;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  position: relative;
+  transition: all 0.2s ease;
+}
+
+.vessert-workbench-container.fullscreen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  border-radius: 0;
+}
+
+/* 1. Window Chrome */
+.vessert-window-chrome {
+  height: 38px;
+  background: #131924;
+  border-bottom: 1px solid #202838;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  flex-shrink: 0;
+  user-select: none;
+}
+.vessert-chrome-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.vessert-dots {
+  display: flex;
+  gap: 7px;
+}
+.vessert-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.dot-close { background: #ef4444; }
+.dot-min { background: #f59e0b; }
+.dot-max { background: #10b981; }
+
+.vessert-chrome-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.vessert-title-text {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+}
+.vessert-badge {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: #1e283a;
+  color: #38bdf8;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+}
+.vessert-status-pill {
+  font-size: 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.pill-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+/* 2. Toolbar */
+.vessert-ui-toolbar {
+  height: 42px;
+  background: #0f1520;
+  border-bottom: 1px solid #1c2434;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.vessert-tb-group {
+  display: flex;
+  gap: 4px;
+}
+.vessert-tb-btn {
+  background: #171f2c;
+  border: 1px solid #232d3f;
+  color: #94a3b8;
+  padding: 4px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.vessert-tb-btn:hover {
+  background: #202b3d;
+  color: #fff;
+  border-color: #3b475f;
+}
+.vessert-tb-btn.active {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  border-color: #38bdf8;
+}
+.tb-log { color: #cbd5e1; }
+.tb-info { color: #38bdf8; }
+.tb-warn { color: #fbbf24; }
+.tb-error { color: #f87171; }
+.tb-debug { color: #a5b4fc; }
+
+.vessert-tb-search {
+  flex: 1;
+  max-width: 260px;
+  display: flex;
+  align-items: center;
+  background: #141b26;
+  border: 1px solid #232d3f;
+  border-radius: 6px;
+  padding: 0 8px;
+  height: 28px;
+}
+.vessert-search-icon {
+  font-size: 11px;
+  opacity: 0.6;
+  margin-right: 6px;
+}
+.vessert-search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 11.5px;
+  color: #fff;
+  font-family: inherit;
+}
+.vessert-tb-actions {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.vessert-theme-select {
+  background: #171f2c;
+  border: 1px solid #232d3f;
+  color: #e2e8f0;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-family: inherit;
+  outline: none;
+  cursor: pointer;
+}
+
+/* 3. Viewport Body & Output */
+.vessert-viewport-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  background: #090d14;
+}
+.vessert-output-pane {
+  flex: 1;
+  overflow-y: auto;
+  padding: 12px 14px;
+  font-family: 'JetBrains Mono', Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.6;
+}
+.vessert-output-pane::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.vessert-output-pane::-webkit-scrollbar-track {
+  background: transparent;
+}
+.vessert-output-pane::-webkit-scrollbar-thumb {
+  background: #1f2937;
+  border-radius: 4px;
+}
+.vessert-output-pane::-webkit-scrollbar-thumb:hover {
+  background: #374151;
+}
+
+/* Console Lines Standard */
+.vessert-console {
+  background: transparent;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  overflow: visible;
+  border: none;
+}
+.vessert-line {
+  padding: 2.5px 6px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  border-radius: 3px;
+}
+.vessert-line:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+.vessert-log   { color: #cbd5e1; }
+.vessert-info  { color: #38bdf8; }
+.vessert-warn  { color: #fbbf24; }
+.vessert-error { color: #f87171; font-weight: 600; }
+.vessert-debug { color: #94a3b8; font-style: italic; }
+.vessert-trace { color: #64748b; text-decoration: underline; }
+.vessert-line.selected { background: #1e3a5f !important; }
+.vessert-line.vessert-match { background: #263345 !important; }
+
+/* 4. Interactive CLI Prompt Bar */
+.vessert-ui-prompt-bar {
+  height: 42px;
+  background: #0e141f;
+  border-top: 1px solid #1c2434;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.vessert-prompt-sym {
+  color: #38bdf8;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 14px;
+}
+.vessert-prompt-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #f8fafc;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12.5px;
+}
+.vessert-prompt-input::placeholder {
+  color: #475569;
+}
+.vessert-prompt-exec {
+  background: #0284c7;
+  border: 1px solid #38bdf8;
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.vessert-prompt-exec:hover {
+  background: #0369a1;
+}
+
+/* 5. Telemetry Status Bar */
+.vessert-ui-status-bar {
+  height: 26px;
+  background: #0a0e16;
+  border-top: 1px solid #1a2230;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  color: #64748b;
+  flex-shrink: 0;
+  user-select: none;
+}
+.vessert-status-left, .vessert-status-right {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.vessert-metric {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.vessert-metric strong {
+  color: #e2e8f0;
+}
+.metric-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+}
+
+/* ==========================================================================
+   Themes Styling for Visual Layer
+   ========================================================================== */
+.theme-dracula {
+  border-color: #44475a;
+  background: #282a36;
+}
+.theme-dracula .vessert-window-chrome { background: #21222c; border-color: #44475a; }
+.theme-dracula .vessert-ui-toolbar { background: #21222c; border-color: #44475a; }
+.theme-dracula .vessert-viewport-body { background: #282a36; }
+.theme-dracula .vessert-ui-prompt-bar { background: #21222c; border-color: #44475a; }
+.theme-dracula .vessert-ui-status-bar { background: #191a21; border-color: #44475a; }
+.theme-dracula .vessert-log { color: #f8f8f2; }
+.theme-dracula .vessert-info { color: #8be9fd; }
+.theme-dracula .vessert-warn { color: #f1fa8c; }
+.theme-dracula .vessert-error { color: #ff5555; }
+.theme-dracula .vessert-debug { color: #bd93f9; }
+
+.theme-nord {
+  border-color: #3b4252;
+  background: #2e3440;
+}
+.theme-nord .vessert-window-chrome { background: #242933; border-color: #3b4252; }
+.theme-nord .vessert-ui-toolbar { background: #242933; border-color: #3b4252; }
+.theme-nord .vessert-viewport-body { background: #2e3440; }
+.theme-nord .vessert-ui-prompt-bar { background: #242933; border-color: #3b4252; }
+.theme-nord .vessert-ui-status-bar { background: #1f232b; border-color: #3b4252; }
+.theme-nord .vessert-log { color: #eceff4; }
+.theme-nord .vessert-info { color: #88c0d0; }
+.theme-nord .vessert-warn { color: #ebcb8b; }
+.theme-nord .vessert-error { color: #bf616a; }
+.theme-nord .vessert-debug { color: #81a1c1; }
+
+.theme-monokai {
+  border-color: #3e3d32;
+  background: #272822;
+}
+.theme-monokai .vessert-window-chrome { background: #1e1f1c; border-color: #3e3d32; }
+.theme-monokai .vessert-ui-toolbar { background: #1e1f1c; border-color: #3e3d32; }
+.theme-monokai .vessert-viewport-body { background: #272822; }
+.theme-monokai .vessert-ui-prompt-bar { background: #1e1f1c; border-color: #3e3d32; }
+.theme-monokai .vessert-ui-status-bar { background: #171814; border-color: #3e3d32; }
+.theme-monokai .vessert-log { color: #f8f8f2; }
+.theme-monokai .vessert-info { color: #66d9ef; }
+.theme-monokai .vessert-warn { color: #e6db74; }
+.theme-monokai .vessert-error { color: #f92672; }
+.theme-monokai .vessert-debug { color: #a6e22e; }
+
+.theme-gruvbox {
+  border-color: #504945;
+  background: #282828;
+}
+.theme-gruvbox .vessert-window-chrome { background: #1d2021; border-color: #504945; }
+.theme-gruvbox .vessert-ui-toolbar { background: #1d2021; border-color: #504945; }
+.theme-gruvbox .vessert-viewport-body { background: #282828; }
+.theme-gruvbox .vessert-ui-prompt-bar { background: #1d2021; border-color: #504945; }
+.theme-gruvbox .vessert-ui-status-bar { background: #141617; border-color: #504945; }
+.theme-gruvbox .vessert-log { color: #ebdbb2; }
+.theme-gruvbox .vessert-info { color: #83a598; }
+.theme-gruvbox .vessert-warn { color: #fabd2f; }
+.theme-gruvbox .vessert-error { color: #fb4934; }
+.theme-gruvbox .vessert-debug { color: #b8bb26; }
+
+/* Retro CRT Mode */
+.retro-crt-mode {
+  border: 8px solid #1a221a !important;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 0 25px rgba(0, 255, 100, 0.2) !important;
+  border-radius: 12px !important;
+  background: radial-gradient(circle at center, #071907 0%, #020702 100%) !important;
+}
+.retro-crt-mode::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(0deg, rgba(0,0,0,0.35) 0px, rgba(0,0,0,0.35) 1px, transparent 1px, transparent 3px);
+  pointer-events: none;
+  z-index: 10;
+}
+.retro-crt-mode .vessert-output-pane {
+  background: transparent !important;
+}
+.retro-crt-mode .vessert-line {
+  font-family: 'VT323', monospace !important;
+  font-size: 19px !important;
+  line-height: 1.35 !important;
+  color: #39ff14 !important;
+  text-shadow: 0 0 6px rgba(57, 255, 20, 0.6) !important;
+}
+.retro-crt-mode .vessert-error {
+  color: #ff3344 !important;
+  text-shadow: 0 0 6px rgba(255, 51, 68, 0.8) !important;
+}
+.retro-crt-mode .vessert-warn {
+  color: #ffcc00 !important;
+  text-shadow: 0 0 6px rgba(255, 204, 0, 0.8) !important;
+}
+.retro-crt-mode .vessert-info {
+  color: #00ffff !important;
+  text-shadow: 0 0 6px rgba(0, 255, 255, 0.8) !important;
+}

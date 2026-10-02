@@ -22,9 +22,16 @@
 
   <script type="module">
     import { Console } from "../src/Vessert.js";
-    const c = new Console();
+    import { ConsoleUI } from "./jsm/ui/ConsoleUI.js";
+    const c = new Console({ theme: "dark" });
     const container = document.getElementById("console-container");
-    c.engine.renderer.dom.mount(container);
+    const ui = new ConsoleUI(c, {
+      container,
+      title: "Interactive Prompt",
+      theme: "dark",
+      retroCRT: false,
+      badge: "INTERACTIVE"
+    });
     c.log("VessertID Console: Interactive Prompt");
     c.info("Command line and prompt input");
     c.debug("Module initialized. Revision: 1.0.0");

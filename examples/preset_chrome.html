@@ -22,9 +22,16 @@
 
   <script type="module">
     import { Console } from "../src/Vessert.js";
-    const c = new Console();
+    import { ConsoleUI } from "./jsm/ui/ConsoleUI.js";
+    const c = new Console({ theme: "dark" });
     const container = document.getElementById("console-container");
-    c.engine.renderer.dom.mount(container);
+    const ui = new ConsoleUI(c, {
+      container,
+      title: "Preset: Chrome",
+      theme: "dark",
+      retroCRT: false,
+      badge: "PRESET"
+    });
     c.log("VessertID Console: Preset: Chrome");
     c.info("Chrome DevTools style");
     c.debug("Module initialized. Revision: 1.0.0");
